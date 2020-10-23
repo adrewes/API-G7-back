@@ -25,7 +25,7 @@ module.exports = {
                 if (docs.length == 0) {
                     res.status(404)
                 }
-                console.log("Retrieved vacations = %d", docs.length)
+                console.log("Retrieved encuestas = %d", docs.length)
                 res.send(docs)
             }
         });
