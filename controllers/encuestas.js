@@ -4,15 +4,20 @@
 var encuestas = require('../db/encuestas')
 
 module.exports = {
-/*     create(req, res) {
-        return usuario
-            .create({
-                username: req.params.username,
-                status: req.params.status
-            })
-            .then(usuario => res.status(200).send(usuario))
-            .catch(error => res.status(400).send(error))
-    }, */
+	create(req, res) {
+
+        var doc = req.body;
+		new encuestas.save(doc,function (err, doc) {
+
+            if (err) {
+                console.log(err)
+                res.status(500)
+                res.send("Error connecting to db")
+            } else {
+                res.status(201).send(doc)
+            }
+        });
+	},
 
 	list(_, res) {
 		return encuestas.select(null,function (err, docs) {
@@ -31,13 +36,20 @@ module.exports = {
         });
 	},
 
-/*     find(req, res) {
-        return usuario.findAll({
-            where: {
-                username: req.params.username,
+    find(req, res) {
+		return encuestas.select({idEncuesta:{ $eq: req.params.idEncuesta} },function (err, docs) {
+
+            if (err) {
+                console.log(err)
+                res.status(500)
+                res.send("Error connecting to db")
+            } else {
+                if (docs.length == 0) {
+                    res.status(404)
+                }
+                console.log("Retrieved encuestas = %d", docs.length)
+                res.send(docs)
             }
-        })
-            .then(usuario => res.status(200).send(usuario))
-            .catch(error => res.status(400).send(error))
-    }, */
+        });
+	},
 };

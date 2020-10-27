@@ -1,36 +1,34 @@
 /**
- * Todas las operaciones de base de datos de las encuetas
+ * Todas las operaciones de base de datos de las encuestas
  */
-var model = require('../models/encuestas')
-var settings = require('../config/settings')
+var model = require('../models/encuestas');
 
-// CREATE the vacation package
-/* exports.save = function (data, callback) {
+// CREAR una encuesta
+exports.save = function (data, callback) {
 
-    new model.Vacations(data).save(function (err, inserted) {
+    new model.Encuestas(data).save(function (err, inserted) {
         callback(err, inserted)
-
     })
 }
 
-// CREATE multiple vacation packages
+// CREAR multiples encuestas
 exports.saveMany = function (rows, callback) {
 
-    model.Vacations.insertMany(rows, function (err, docs) {
+    model.Encuestas.insertMany(rows, function (err, docs) {
         callback(err, docs)
     })
 
 }
 
-// UPDATE the vacation packages
+// ACTUALIZAR las encuestas
 // http://mongoosejs.com/docs/api.html#model_Model.update
 exports.update = function (criteria, doc, callback) {
     // Replaced .update() with .updateMany() as .update() is deprecated
-    model.Vacations.updateMany(criteria, doc, function (err, data) {
+    model.Encuestas.updateMany(criteria, doc, function (err, data) {
         callback(err, data)
 
     })
-} */
+} 
 
 // RETRIEVE vacation packages based on criteria
 exports.select = function (criteria, callback) {

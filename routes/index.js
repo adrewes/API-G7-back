@@ -6,7 +6,7 @@ module.exports = (app) => {
         message: 'Example project did not give you access to the api web services',
     })); 
     
-    //app.post('/api/encuestas/create/, encuestas.create);
+    app.post('/api/encuesta/create/', encuestasController.create);
     app.get('/api/encuesta/list', encuestasController.list);
-    //app.get('/api/usuario/find/username/:username', encuestas.find);
+    app.get('/api/encuesta/find/:idEncuesta', encuestasController.find);
 };
