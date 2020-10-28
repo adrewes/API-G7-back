@@ -6,19 +6,33 @@ var model = require('../models/encuestas');
 // CREAR una encuesta
 exports.save = function (data, callback) {
 
-    new model.Encuestas(data).save(function (err, inserted) {
+    model.Encuestas({
+        idEncuesta : data.idEncuesta,
+        userId : data.userId,
+        companyName : data.companyName,
+        name : data.name,
+        description : data.description,
+        status : data.status,
+        created: data.created,
+        modified: data.modified,
+        sections: data.sections
+    }).save(function (err, inserted) {
         callback(err, inserted)
     })
+    
+/*     model.save(function (err, inserted) {
+        callback(err, inserted)
+    }) */
 }
 
 // CREAR multiples encuestas
-exports.saveMany = function (rows, callback) {
+/* exports.saveMany = function (rows, callback) {
 
     model.Encuestas.insertMany(rows, function (err, docs) {
         callback(err, docs)
     })
 
-}
+} */
 
 // ACTUALIZAR las encuestas
 // http://mongoosejs.com/docs/api.html#model_Model.update

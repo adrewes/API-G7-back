@@ -15,7 +15,7 @@ var EncuestasSchema = settings.mongoose.Schema(
         description: {type:String, required:[true,'"description" es requerido']},
 
         //Estado de la encuesta 
-        status: {type:String, enum:['COMPLETE','APROBADA','RECHAZADA'], required:[true,'"status" es requerido']},
+        status: {type:String, enum:['COMPLETED','APROBADA','RECHAZADA'], required:[true,'"status" es requerido']},
 
         //Fecha de envio de la encuesta
         created: {type:Date, required: [true,'"created" es requerido']},
@@ -26,10 +26,11 @@ var EncuestasSchema = settings.mongoose.Schema(
         //Secciones de la encuesta
         sections: [{
             //Titulo de la seccion
-            title: {type:String, required:[true,'"fecha" es requerido']},
+            title: {type:String, required:[true,'"title" es requerido']},
 
+            // description: {type:String, required:[true,'"fecha" es requerido']},
             //Descripcion de la seccion
-            description: {type:String, required:[true,'"fecha" es requerido']},
+            description: {type:String, required:false},
             
             //Preguntas
             questions: [{
@@ -43,7 +44,8 @@ var EncuestasSchema = settings.mongoose.Schema(
                 title: {type:String, required:[true,'"title" es requerido']},
 
                 //Valor completado por la empresa
-                value: {type:String, required:[true,'"value" es requerido']},
+                //TODO Ver el caso de archivos
+                value: {type:String, required:false},
 
                 //Obligatoriedad de la pregunta
                 mandatory: {type:Boolean, required:true, default:false},
@@ -62,49 +64,49 @@ var EncuestasSchema = settings.mongoose.Schema(
                 
                 revisiones :[{
                     //ID de la revision
-                    idRevision: {type:String, required:[true,'"idRevision" es requerido']},
+                    idRevision: {type:String, required:[false,'"idRevision" es requerido']},
                     
                     //Datos de la realizada
                     observacion: {
                         //Nombre de usuario que realizo la observacion
-                        usuario: {type:String, required:[true,'"usuario" es requerido']},
+                        usuario: {type:String, required:[false,'"usuario" es requerido']},
 
                         //Mensaje de la observacion
-                        mensaje: {type:String, required:[true,'"mensaje" es requerido']},
+                        mensaje: {type:String, required:[false,'"mensaje" es requerido']},
 
                         //Fecha y hora de la creacion de la revision
-                        created: {type:Date, required: [true,'"created" es requerido']},
+                        created: {type:Date, required: [false,'"created" es requerido']},
                     },
                     respuestaValidada: {
                         //Nombre de usuario que realizo la validacion
-                        usuario: {type:String, required:[true,'"usuario" es requerido']},
+                        usuario: {type:String, required:[false,'"usuario" es requerido']},
 
                         //Nuevo valor de la respuesta
-                        value: {type:String, required:[true,'"mensaje" es requerido']},
+                        value: {type:String, required:[false,'"mensaje" es requerido']},
 
                         //Fecha y hora de la creacion de la respuesta
-                        created: {type:Date, required: [true,'"created" es requerido']},
+                        created: {type:Date, required: [false,'"created" es requerido']},
                     }
                 }],
 
                 questions: [{
                     //ID de la pregunta
-                    idPregunta : {type:String, required:[true,'"idPregunta" es requerido']},
+                    idPregunta : {type:String, required:[false,'"idPregunta" es requerido']},
     
                     //ID del usuario proveniente API de formularios
-                    type : {type:String, enum: ['TEXT','NUMBER','SELECT','CHOICE','FILE','GROUPED'], required:[true,'"type" es requerido']},
+                    type : {type:String, enum: ['TEXT','NUMBER','SELECT','CHOICE','FILE','GROUPED'], required:[false,'"type" es requerido']},
     
                     //Titulo de la pregunta
-                    title: {type:String, required:[true,'"title" es requerido']},
+                    title: {type:String, required:[false,'"title" es requerido']},
     
                     //Valor completado por la empresa
-                    value: {type:String, required:[true,'"value" es requerido']},
+                    value: {type:String, required:[false,'"value" es requerido']},
     
                     //Obligatoriedad de la pregunta
-                    mandatory: {type:Boolean, required:true, default:false},
+                    mandatory: {type:Boolean, required:false, default:false},
     
                     //Indica se permite el ingeso de valores con saltos de linea
-                    multiline: {type:Boolean, required:true, default:false},
+                    multiline: {type:Boolean, required:false, default:false},
     
                     //Restricciones que aplican a las respuestas
                     restrictions: {
@@ -117,28 +119,28 @@ var EncuestasSchema = settings.mongoose.Schema(
                      
                     revisiones :[{
                         //ID de la revision
-                        idRevision: {type:String, required:[true,'"idRevision" es requerido']},
+                        idRevision: {type:String, required:[false,'"idRevision" es requerido']},
                         
                         //Datos de la realizada
                         observacion: {
                             //Nombre de usuario que realizo la observacion
-                            usuario: {type:String, required:[true,'"usuario" es requerido']},
+                            usuario: {type:String, required:[false,'"usuario" es requerido']},
     
                             //Mensaje de la observacion
-                            mensaje: {type:String, required:[true,'"mensaje" es requerido']},
+                            mensaje: {type:String, required:[false,'"mensaje" es requerido']},
     
                             //Fecha y hora de la creacion de la revision
-                            created: {type:Date, required: [true,'"created" es requerido']},
+                            created: {type:Date, required: [false,'"created" es requerido']},
                         },
                         respuestaValidada: {
                             //Nombre de usuario que realizo la validacion
-                            usuario: {type:String, required:[true,'"usuario" es requerido']},
+                            usuario: {type:String, required:[false,'"usuario" es requerido']},
     
                             //Nuevo valor de la respuesta
-                            value: {type:String, required:[true,'"mensaje" es requerido']},
+                            value: {type:String, required:[false,'"mensaje" es requerido']},
     
                             //Fecha y hora de la creacion de la respuesta
-                            created: {type:Date, required: [true,'"created" es requerido']},
+                            created: {type:Date, required: [false,'"created" es requerido']},
                         }
                     }],
                 }]

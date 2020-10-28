@@ -7,12 +7,13 @@ module.exports = {
 	create(req, res) {
 
         var doc = req.body;
-		new encuestas.save(doc,function (err, doc) {
+		encuestas.save(doc,function (err, doc) {
 
             if (err) {
                 console.log(err)
                 res.status(500)
-                res.send("Error connecting to db")
+                // res.send("Error connecting to db")
+                res.send(err)
             } else {
                 res.status(201).send(doc)
             }
