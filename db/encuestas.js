@@ -7,7 +7,6 @@ var model = require('../models/encuestas');
 exports.save = function (data, callback) {
 
     model.Encuestas({
-        idEncuesta : data.idEncuesta,
         userId : data.userId,
         companyName : data.companyName,
         name : data.name,
@@ -15,7 +14,8 @@ exports.save = function (data, callback) {
         status : data.status,
         created: data.created,
         modified: data.modified,
-        sections: data.sections
+        sections: data.sections,
+        questions: data.questions
     }).save(function (err, inserted) {
         callback(err, inserted)
     })
@@ -44,9 +44,12 @@ exports.update = function (criteria, doc, callback) {
     })
 } 
 
-// RETRIEVE vacation packages based on criteria
+// RETRIEVE encuestas packages based on criteria
 exports.select = function (criteria, callback) {
-    model.Encuestas.find(criteria, function (err, data) {
-        callback(err, data)
-    })
+    model.Encuestas.
+        findById(criteria).
+        populate('sections.questions').
+        exec(function (err, data) {
+            callback(err, data)
+        });
 }

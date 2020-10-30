@@ -38,7 +38,7 @@ module.exports = {
 	},
 
     find(req, res) {
-		return encuestas.select({idEncuesta:{ $eq: req.params.idEncuesta} },function (err, docs) {
+		return encuestas.select(req.params.idEncuesta, function (err, docs) {
 
             if (err) {
                 console.log(err)
