@@ -8,7 +8,7 @@ exports.save = function (data, callback) {
 
     model.Revisiones({
 
-        idEncuesta : data.idEncuesta,
+        idPregunta : data.idPregunta,
         observacion : data.observacion,
         respuestaValidada : data.respuestaValidada
 

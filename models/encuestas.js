@@ -64,40 +64,11 @@ var EncuestasSchema = settings.mongoose.Schema(
             description: {type:String, required:false},
             
             //Preguntas
-            questions: [{
-
-                //ID del usuario proveniente API de formularios
-                type : {type:String, enum: ['TEXT','NUMBER','SELECT','CHOICE','FILE','GROUPED'], required:[true,'"type" es requerido']},
-        
-                //Titulo de la pregunta
-                title: {type:String, required:[true,'"title" es requerido']},
-        
-                //Valor completado por la empresa
-                //TODO Ver el caso de archivos
-                value: {type:String, required:false},
-        
-                //Obligatoriedad de la pregunta
-                mandatory: {type:Boolean, required:true, default:false},
-                
-                //Indica se permite el ingeso de valores con saltos de linea
-                multiline: {type:Boolean, required:true, default:false},
-                
-                //Restricciones que aplican a las respuestas
-                restrictions: {
-                    min: {type:String, required:false},
-                    max: {type:String, required:false}
-                },
-        
-                //Indica en que formato está la respuesta
-                adornment: {type:String, required:false},
-        
-                //Preguntas en el caso de que sea multiline
-                questions: [PreguntasSchema]
-            }]
+            questions: [{type: settings.mongoose.Schema.Types.ObjectId, ref: 'preguntas', required: true}],
         }]
     }
 );
 
 // Export the model
-exports.Encuestas = settings.mongoose.model('encuestas', EncuestasSchema)
-exports.Preguntas = settings.mongoose.model('preguntas', PreguntasSchema)
+exports.Encuestas = settings.mongoose.model('encuestas', EncuestasSchema,'encuestas')
+//exports.Preguntas = settings.mongoose.model('preguntas', PreguntasSchema)

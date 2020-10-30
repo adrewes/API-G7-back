@@ -1,13 +1,10 @@
-//const Sequelize = require('sequelize');
-//const usuario = require('../models').usuario;
-
-var encuestas = require('../db/encuestas')
+var preguntas = require('../db/preguntas')
 
 module.exports = {
 	create(req, res) {
 
         var doc = req.body;
-		encuestas.save(doc,function (err, doc) {
+		preguntas.save(doc,function (err, doc) {
 
             if (err) {
                 console.log(err)
@@ -21,7 +18,7 @@ module.exports = {
 	},
 
 	list(_, res) {
-		return encuestas.list(null,function (err, docs) {
+		return preguntas.select(null,function (err, docs) {
 
             if (err) {
                 console.log(err)
@@ -31,14 +28,14 @@ module.exports = {
                 if (docs.length == 0) {
                     res.status(404)
                 }
-                console.log("Retrieved encuestas = %d", docs.length)
+                console.log("Retrieved preguntas = %d", docs.length)
                 res.send(docs)
             }
         });
 	},
 
     find(req, res) {
-		return encuestas.select({_id:{ $eq: req.params.idEncuesta} },function (err, docs) {
+		return preguntas.select(req.params.idEncuesta, function (err, docs) {
 
             if (err) {
                 console.log(err)

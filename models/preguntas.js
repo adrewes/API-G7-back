@@ -32,5 +32,5 @@ var PreguntasSchema = settings.mongoose.Schema(
     }
 );
 
-//exports.Preguntas = settings.mongoose.model('preguntas', PreguntasSchema)
+exports.Preguntas = settings.mongoose.model('preguntas', PreguntasSchema)
 //exports.PreguntasSchema

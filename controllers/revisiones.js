@@ -19,7 +19,7 @@ module.exports = {
 
     list(req, res) {
         return revisiones.select({
-            idEncuesta: { $eq: req.params.idEncuesta } }, function(err, docs) {
+            idEncuesta: { $eq: req.params.idPregunta } }, function(err, docs) {
 
                 if (err) {
                     console.log(err)

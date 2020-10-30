@@ -1,21 +1,21 @@
 /**
  * Todas las operaciones de base de datos de las encuestas
  */
-var model = require('../models/encuestas');
+var model = require('../models/preguntas');
 
-// CREAR una encuesta
+// CREAR una lista de preguntas
 exports.save = function (data, callback) {
 
-    model.Encuestas({
-        userId : data.userId,
-        companyName : data.companyName,
-        name : data.name,
-        description : data.description,
-        status : data.status,
-        created: data.created,
-        modified: data.modified,
-        sections: data.sections,
-        questions: data.questions
+    model.Preguntas({
+        type: data.type,
+        title: data.title,
+        value: data.value,
+        mandatory: data.mandatory,
+        multiline: data.multiline,
+        restrictions : data.restrictions,
+        adornment : data.adornment,
+        questions : data.questions
+
     }).save(function (err, inserted) {
         callback(err, inserted)
     })
@@ -45,15 +45,11 @@ exports.update = function (criteria, doc, callback) {
 } 
 
 // RETRIEVE encuestas packages based on criteria
-exports.list = function (criteria, callback) {
-    model.Encuestas.find(criteria, function (err, data) {
-        callback(err, data)
-    })
-}
-
-// RETRIEVE encuestas packages based on criteria
 exports.select = function (criteria, callback) {
-    model.Encuestas.find(criteria, function (err, data) {
-        callback(err, data)
-    }).populate("sections.questions")
+    model.Encuestas.
+        findById(criteria).
+        populate('sections.questions').
+        exec(function (err, data) {
+            callback(err, data)
+        });
 }
