@@ -5,6 +5,9 @@ var PreguntasSchema = settings.mongoose.Schema(
         //ID del usuario proveniente API de formularios
         type : {type:String, enum: ['TEXT','NUMBER','SELECT','CHOICE','FILE','GROUPED'], required:[true,'"type" es requerido']},
 
+        //Estado de la revision 
+        status: {type:String, enum:['PENDIENTE','EN_REVISION','VALIDADA','APROBADA'], required:[true,'"status" es requerido']},
+
         //Titulo de la pregunta
         title: {type:String, required:[true,'"title" es requerido']},
 
@@ -28,7 +31,32 @@ var PreguntasSchema = settings.mongoose.Schema(
         adornment: {type:String, required:false},
 
         //Preguntas en el caso de que sea multiline
-        questions: [this]
+        questions: [this],
+
+        //Revisiones
+        revisiones: [{
+
+            //Estado de la revision 
+            status: {type:String, enum:['REVISION','VALIDADA','APROBADA'], required:[true,'"status" es requerido']},
+
+            //Datos de la observacion
+            observacion: {
+                //Nombre de usuario que realizo la observacion
+                usuario: {type:String, required:[true,'"usuario" es requerido']},          
+                //Mensaje de la observacion
+                mensaje: {type:String, required:[true,'"mensaje" es requerido']},          
+                //Fecha y hora de la creacion de la revision
+                created: {type:Date, required: [true,'"created" es requerido']},
+            },
+            respuestaValidada: {
+                //Nombre de usuario que realizo la validacion
+                usuario: {type:String, required:[true,'"usuario" es requerido']},          
+                //Nuevo valor de la respuesta
+                value: {type:String, required:[true,'"mensaje" es requerido']},            
+                //Fecha y hora de la creacion de la respuesta
+                created: {type:Date, required: [true,'"created" es requerido']},
+            }
+        }]
     }
 );
 

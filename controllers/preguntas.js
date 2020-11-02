@@ -15,6 +15,54 @@ module.exports = {
                 res.status(201).send(doc)
             }
         });
+    },
+
+    createRevision(req, res) {
+
+        var doc = req.body;
+		preguntas.updatePregunta(doc,function (err, doc) {
+
+            if (err) {
+                console.log(err)
+                res.status(500)
+                // res.send("Error connecting to db")
+                res.send(err)
+            } else {
+                res.status(201).send(doc)
+            }
+        });
+    },
+
+    patchPregunta(req, res) {
+
+        var doc = req.body;
+		preguntas.updatePregunta(doc,function (err, doc) {
+
+            if (err) {
+                console.log(err)
+                res.status(500)
+                // res.send("Error connecting to db")
+                res.send(err)
+            } else {
+                res.status(201).send(doc)
+            }
+        });
+    },
+
+    patchRevision(req, res) {
+
+        var doc = req.body;
+		preguntas.updateRevision({"_id": doc.idPregunta, "revisiones._id": doc.idRevision }, doc, function (err, doc) {
+
+            if (err) {
+                console.log(err)
+                res.status(500)
+                // res.send("Error connecting to db")
+                res.send(err)
+            } else {
+                res.status(200).send(doc)
+            }
+        });
 	},
 
 	list(_, res) {
@@ -35,7 +83,8 @@ module.exports = {
 	},
 
     find(req, res) {
-		return preguntas.select(req.params.idEncuesta, function (err, docs) {
+        var doc = req.body;
+		return preguntas.select({_id: doc.idPregunta, "revisiones._id": doc.idRevision}, function (err, docs) {
 
             if (err) {
                 console.log(err)
@@ -49,5 +98,6 @@ module.exports = {
                 res.send(docs)
             }
         });
-	},
+    },
+    
 };

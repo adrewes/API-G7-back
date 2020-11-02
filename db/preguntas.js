@@ -34,22 +34,42 @@ exports.save = function (data, callback) {
 
 } */
 
-// ACTUALIZAR las encuestas
+// ACTUALIZAR las preguntas agregando una revision
 // http://mongoosejs.com/docs/api.html#model_Model.update
-exports.update = function (criteria, doc, callback) {
+exports.updatePregunta = function (doc, callback) {
     // Replaced .update() with .updateMany() as .update() is deprecated
-    model.Encuestas.updateMany(criteria, doc, function (err, data) {
-        callback(err, data)
-
-    })
+    model.Preguntas.findOneAndUpdate(
+        {_id : doc.idPregunta},
+        { $push: { revisiones : doc.revision }}, null , function (err, data) {
+            callback(err, data)
+        }).populate('questions','revisiones')
 } 
 
-// RETRIEVE encuestas packages based on criteria
-exports.select = function (criteria, callback) {
-    model.Encuestas.
-        findById(criteria).
-        populate('sections.questions').
-        exec(function (err, data) {
+// ACTUALIZAR las preguntas modificando una revision
+// http://mongoosejs.com/docs/api.html#model_Model.update
+/* exports.updateRevision = function (criteria, doc,  callback) {
+    // Replaced .update() with .updateMany() as .update() is deprecated
+    model.Preguntas.findOneAndUpdate(
+        criteria,
+        {$set: {"revisiones.revision": doc}}, null , function (err, data) {
             callback(err, data)
-        });
+        }).populate('questions','revisiones')
+} 
+ */
+
+exports.updateRevision = function (criteria, doc,  callback) {
+    // Replaced .update() with .updateMany() as .update() is deprecated
+    model.Preguntas.findOneAndUpdate(criteria,
+        { "revisiones.$": doc.revision}, {new: true} , function (err, data) {
+            callback(err, data)
+        }).populate('questions','revisiones')
+} 
+
+
+
+// RETRIEVE preguntas based on criteria
+exports.select = function (criteria, callback) {
+    model.Preguntas.find(criteria, function (err, data) {
+        callback(err, data)
+    })
 }
