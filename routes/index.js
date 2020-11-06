@@ -1,6 +1,7 @@
 /* Controllers */
 const preguntasController = require('../controllers/preguntas');
 const encuestasController = require('../controllers/encuestas'); 
+const usuariosController = require('../controllers/usuarios'); 
 
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send({
@@ -17,9 +18,12 @@ module.exports = (app) => {
     app.patch('/api/pregunta/revision',preguntasController.patchRevision);
 
     //Encuestas
-    app.post('/api/encuesta/create/', encuestasController.create);
+    //app.post('/api/encuesta', encuestasController.create);
     app.patch('/api/encuesta/:idEncuesta', encuestasController.patch);
-    app.get('/api/encuesta/list', encuestasController.list);
-    app.get('/api/encuesta/find/:idEncuesta', encuestasController.find);
+    app.get('/api/encuesta/', encuestasController.list);
+    app.get('/api/encuesta/:idEncuesta', encuestasController.find);
+
+    //Login
+   // app.post('/api/login', usuariosController.post);
 
 };

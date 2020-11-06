@@ -2,6 +2,9 @@ var settings = require('../config/settings')
 
 var EncuestasSchema = settings.mongoose.Schema(
     {
+        //ID de la encuesta generado por el modulo anterior
+        idEncuesta : {type:String, required:[true,'"idEncuesta" es requerido']},
+
         //ID del usuario proveniente API de formularios
         userId : {type:String, required:[true,'"userId" es requerido']},
 
@@ -10,6 +13,11 @@ var EncuestasSchema = settings.mongoose.Schema(
 
         //Descripcion de la encuesta
         description: {type:String, required:[true,'"description" es requerido']},
+
+        //Datos de la compañia
+        company : {
+            name: {type:String, required:[true,'"company.name" es requerido']},
+        },
 
         //Estado de la encuesta 
         status: {type:String, enum:['COMPLETED','APROBADA','RECHAZADA'], required:[true,'"status" es requerido']},

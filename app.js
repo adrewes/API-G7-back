@@ -1,12 +1,28 @@
-const express       = require('express');
-const logger        = require('morgan');
-const bodyParser    = require('body-parser');
+const express        = require('express');
+const logger         = require('morgan');
+const bodyParser     = require('body-parser');
+const encuestasCron  = require('./controllers/encuestas-cron');
 
 // This will be our application entry. We'll setup our server here.
 const http = require('http');
 
+//Set up de cron scheduler
+const cron = require('node-cron');
+
 // Set up the express app
 const app = express();
+
+// Schedule tasks to be run on the server.
+/* cron.schedule('* * * * *', function() {
+     console.log('running a task every minute');
+   }); */
+
+cron.schedule('* * * * *', function() {
+     console.log('running a task every minute');
+     encuestasCron.asyncPollsApiCall("2020-10-20")
+   });
+
+
 
 // Log requests to the console.
 app.use(logger('dev'));

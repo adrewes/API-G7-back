@@ -6,3 +6,5 @@ npm install --save express body-parser morgan
 npm i -D nodemon
 npm install mongoose
 npm install mongoose-id-validator
+npm install node-cron
+npm install axios
