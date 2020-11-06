@@ -12,6 +12,7 @@ module.exports = {
                 // res.send("Error connecting to db")
                 res.send(err)
             } else {
+                res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
                 res.status(201).send(doc)
             }
         });
@@ -28,6 +29,7 @@ module.exports = {
                 // res.send("Error connecting to db")
                 res.send(err)
             } else {
+                res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
                 res.status(201).send(doc)
             }
         });
@@ -44,6 +46,7 @@ module.exports = {
                 // res.send("Error connecting to db")
                 res.send(err)
             } else {
+                res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
                 res.status(201).send(doc)
             }
         });
@@ -60,6 +63,7 @@ module.exports = {
                 // res.send("Error connecting to db")
                 res.send(err)
             } else {
+                res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
                 res.status(200).send(doc)
             }
         });
