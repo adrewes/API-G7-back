@@ -20,6 +20,22 @@ module.exports = {
         });
 	},
 
+    patch(req, res) {
+
+        var doc = req.body;
+		encuestas.update({"_id": req.params.idEncuesta}, doc, function (err, doc) {
+
+            if (err) {
+                console.log(err)
+                res.status(500)
+                // res.send("Error connecting to db")
+                res.send(err)
+            } else {
+                res.status(200).send(doc)
+            }
+        });
+    },
+
 	list(_, res) {
 		return encuestas.list(null,function (err, docs) {
 

@@ -18,7 +18,7 @@ module.exports = (app) => {
 
     //Encuestas
     app.post('/api/encuesta/create/', encuestasController.create);
-    //app.patch('/api/encuesta/:idEncuesta', encuestasController.patch);
+    app.patch('/api/encuesta/:idEncuesta', encuestasController.patch);
     app.get('/api/encuesta/list', encuestasController.list);
     app.get('/api/encuesta/find/:idEncuesta', encuestasController.find);
 

@@ -14,6 +14,9 @@ var uri = "mongodb+srv://admin:admin@fundacion-pyme.3haxh.mongodb.net/encuestas?
 // No need to provid ethe user /password separately its part of the URI
 // var options = {user:process.env.DB_USER, pass:process.env.DB_PASSWORD}
 
+//Config para que corra las validaciones de campos en todas las transacciones
+mongoose.set('runValidators', true);
+
 mongoose.connect(uri, {
     // useMongoClient: true
     useNewUrlParser: true,

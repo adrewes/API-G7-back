@@ -20,9 +20,6 @@ exports.save = function (data, callback) {
         callback(err, inserted)
     })
     
-/*     model.save(function (err, inserted) {
-        callback(err, inserted)
-    }) */
 }
 
 // CREAR multiples encuestas
@@ -34,15 +31,24 @@ exports.save = function (data, callback) {
 
 } */
 
+exports.update = function (criteria, doc, callback) {
+    // Replaced .update() with .updateMany() as .update() is deprecated
+    model.Encuestas.findOneAndUpdate(
+        criteria,
+        { "status" : doc.status }, {new: true}, function (err, data) {
+            callback(err, data)
+        })
+} 
+
 // ACTUALIZAR las encuestas
 // http://mongoosejs.com/docs/api.html#model_Model.update
-exports.update = function (criteria, doc, callback) {
+/* exports.update = function (criteria, doc, callback) {
     // Replaced .update() with .updateMany() as .update() is deprecated
     model.Encuestas.updateMany(criteria, doc, function (err, data) {
         callback(err, data)
 
     })
-} 
+}  */
 
 // RETRIEVE encuestas packages based on criteria
 exports.list = function (criteria, callback) {
