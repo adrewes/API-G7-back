@@ -48,6 +48,7 @@ module.exports = {
                     res.status(404)
                 }
                 console.log("Retrieved encuestas = %d", docs.length)
+                res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
                 res.send(docs)
             }
         });
