@@ -17,7 +17,7 @@ const app = express();
      console.log('running a task every minute');
    }); */
 
-cron.schedule('* * * * * *', function() {
+cron.schedule('0 0 * * *', function() {
 
      //Construyo la fecha del dia anterior en formato "AAAA-MM-DD"
      let dateObj = new Date();
