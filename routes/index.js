@@ -10,15 +10,15 @@ module.exports = (app) => {
     
     //Preguntas
     //TODO No hacen faltas endpoint de preguntas salvo que usemos otro servicio para levantar las encuestas
-/*     app.post('/api/pregunta/create/', preguntasController.create);
-    app.get('/api/pregunta/list/', preguntasController.find);
+/*     app.post('/api/pregunta', preguntasController.create);
+  app.get('/api/pregunta/list/', preguntasController.find);
     app.patch('/api/pregunta/',preguntasController.patchPregunta); */
 
     app.post('/api/pregunta/revision',preguntasController.createRevision);  
     app.patch('/api/pregunta/revision',preguntasController.patchRevision);
 
     //Encuestas
-    //app.post('/api/encuesta', encuestasController.create);
+    app.post('/api/encuesta', encuestasController.create);
     app.patch('/api/encuesta/:idEncuesta', encuestasController.patch);
     app.get('/api/encuesta/', encuestasController.list);
     app.get('/api/encuesta/:idEncuesta', encuestasController.find);

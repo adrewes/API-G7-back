@@ -8,6 +8,7 @@ exports.save = function (data, callback) {
 
     model.Preguntas({
         type: data.type,
+        status : data.status,
         title: data.title,
         value: data.value,
         mandatory: data.mandatory,
@@ -16,7 +17,7 @@ exports.save = function (data, callback) {
         adornment : data.adornment,
         questions : data.questions
 
-    }).save(function (err, inserted) {
+    }).save().then(function (err, inserted) {
         callback(err, inserted)
     })
     

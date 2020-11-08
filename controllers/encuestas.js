@@ -1,9 +1,61 @@
 //const Sequelize = require('sequelize');
 //const usuario = require('../models').usuario;
 
-var encuestas = require('../db/encuestas')
+const encuestas = require('../db/encuestas')
+const preguntasController = require('../controllers/preguntas');
+var mongoose = require('mongoose')
 
 module.exports = {
+
+    createEncuestaInternal(encuesta) {
+
+        preguntasArray = []
+
+        var encuestaModel = {
+
+            idEncuesta: encuesta.id,
+            userId : encuesta.userId,
+            company: encuesta.company,
+            name : encuesta.name,
+            description : encuesta.description,
+            status : encuesta.status,
+            created: encuesta.created,
+            modified: encuesta.modified,        
+            sections: []
+        }
+
+        for (let seccion of encuesta.sections){
+            
+            for (let pregunta of seccion.questions){
+
+                pregunta.id = mongoose.Types.ObjectId();
+                preguntasController.createPreguntaInternal(pregunta,function (err, doc) {
+
+                    if (err) {
+                        console.log(err)
+                        throw (err)
+                    }                        
+                });
+                preguntasArray.push(pregunta.id);
+            }
+            encuestaModel.sections.push({
+                title: seccion.title,
+                description: seccion.description,
+                questions : preguntasArray
+            });
+        
+        }
+        encuestas.save(encuestaModel,function (err, doc) {
+
+            if (err) {
+                console.log(err)
+
+            } else {
+                console.log(doc)
+            }
+        });
+    },
+
 	create(req, res) {
 
         var doc = req.body;

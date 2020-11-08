@@ -1,6 +1,34 @@
 var preguntas = require('../db/preguntas')
 
 module.exports = {
+
+    createPreguntaInternal(pregunta, callback){
+
+        var preguntaModel = {
+
+            type: pregunta.type,
+            status : pregunta.status ? pregunta.status : "PENDIENTE",
+            title: pregunta.title,
+            value: pregunta.type == "FILE" ? pregunta.value[0].name : pregunta.value,
+            mandatory: pregunta.mandatory,
+            multiline: pregunta.multiline,
+            restrictions : pregunta.restrictions,
+            adornment : pregunta.adornment,
+            questions : pregunta.questions
+        }
+
+        preguntas.save(preguntaModel, function (err, doc) {
+
+            if (err) {
+                console.log(err)
+                return (err)
+            } else {
+                callback(err,doc);
+            }
+        });
+
+    },
+
 	create(req, res) {
 
         var doc = req.body;

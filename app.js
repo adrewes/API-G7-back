@@ -17,9 +17,28 @@ const app = express();
      console.log('running a task every minute');
    }); */
 
-cron.schedule('* * * * *', function() {
-     console.log('running a task every minute');
-     encuestasCron.asyncPollsApiCall("2020-10-20")
+cron.schedule('* * * * * *', function() {
+
+     //Construyo la fecha del dia anterior en formato "AAAA-MM-DD"
+     let dateObj = new Date();
+
+     //Seteo la fecha de ayer
+     dateObj.setDate(dateObj.getDate() - 1);
+
+     // year as (YYYY) format
+     let year = dateObj.getFullYear();
+
+     // month as (MM) format
+     let month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
+
+     // date as (DD) format
+     let date = ("0" + dateObj.getDate()).slice(-2);
+
+     // date as YYYY-MM-DD format
+     let dateQuery = year + "-" + month + "-" + date;
+
+     console.log('Ruuning Encuestas Cron Job for date ' + dateQuery);
+     encuestasCron.asyncPollsApiCall(dateQuery)
    });
 
 

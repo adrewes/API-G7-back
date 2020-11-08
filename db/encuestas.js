@@ -9,7 +9,7 @@ exports.save = function (data, callback) {
     model.Encuestas({
         idEncuesta: data.idEncuesta,
         userId : data.userId,
-        companyName : data.companyName,
+        company: data.company,
         name : data.name,
         description : data.description,
         status : data.status,
