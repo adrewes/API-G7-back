@@ -54,5 +54,4 @@ process.env.JWT_SECRET = require('crypto').randomBytes(64).toString('hex')
 //Seteo el tiempo de expiracion del token (5 minutos)
 process.env.JWT_EXP = "300s"
 
-
 console.log('El secreto del token es: ' + process.env.JWT_SECRET);
