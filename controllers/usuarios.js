@@ -1,4 +1,5 @@
 var usuarios = require('../db/usuarios')
+const authController = require('../controllers/authentication'); 
 
 module.exports = {
 
@@ -36,7 +37,10 @@ module.exports = {
         });
 	},
 
-	list(_, res) {
+	list(req, res) {
+
+        authController.authenticateToken(req, res, "ADMINISTRADOR")
+
 		return usuarios.select(null,function (err, docs) {
 
             if (err) {
@@ -52,24 +56,6 @@ module.exports = {
             }
         });
 	},
-
-    findById(req, res) {
-
-		return usuarios.selectOne({ _id: req.params.userId}, function (err, docs) {
-
-            if (err) {
-                console.log(err)
-                res.status(500)
-                res.send("Error connecting to db")
-            } else {
-                if (docs.length == 0) {
-                    res.status(404)
-                }
-                console.log("Retrieved usuarios = %d", docs.length)
-                res.send(docs)
-            }
-        });
-    },
 
     findByUsername(req, res) {
 

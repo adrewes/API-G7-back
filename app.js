@@ -41,7 +41,7 @@ cron.schedule('0 0 * * *', function() {
 
      console.log('Runing Encuestas Cron Job for date ' + dateQuery);
      encuestasCron.asyncPollsApiCall(dateQuery)
-   });
+   }, "America/Argentina/Buenos_Aires");
 
 
 
