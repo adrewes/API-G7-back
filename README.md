@@ -8,3 +8,4 @@ npm install mongoose
 npm install mongoose-id-validator
 npm install node-cron
 npm install axios
+npm install jsonwebtoken

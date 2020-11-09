@@ -7,9 +7,17 @@ var mongoose = require('mongoose')
 mongoose.Promise = global.Promise;
 
 // This environment property is used for getting the URI for MongoDB
-// 'mongodb://<user>:<password>@ds163387.mlab.com:63387/acme123'
-//var uri = process.env.DB_URI
-var uri = "mongodb+srv://admin:admin@fundacion-pyme.3haxh.mongodb.net/encuestas?retryWrites=true&w=majority"
+
+const DB_USER = "admin"
+const DB_PASSWORD = "admin"
+const DB_NAME = "encuestas"
+const CLUSTER_HOST = "fundacion-pyme.3haxh.mongodb.net"
+
+// Setup the DB URI
+process.env.DB_URI = "mongodb+srv://"+DB_USER+":"+DB_PASSWORD+"@"+CLUSTER_HOST+"/"+DB_NAME+"?retryWrites=true&w=majority"
+
+var uri = process.env.DB_URI
+//var uri = "mongodb+srv://admin:admin@fundacion-pyme.3haxh.mongodb.net/encuestas?retryWrites=true&w=majority"
 
 // No need to provid ethe user /password separately its part of the URI
 // var options = {user:process.env.DB_USER, pass:process.env.DB_PASSWORD}
@@ -39,3 +47,12 @@ mongoose.connection.on('open', function(){
 // export the mongoose & db
 exports.mongoose = mongoose;
 exports.db = mongoose.connection;
+
+//Seteo el secreto para la generacion y validacion de jwt
+process.env.JWT_SECRET = require('crypto').randomBytes(64).toString('hex')
+
+//Seteo el tiempo de expiracion del token (5 minutos)
+process.env.JWT_EXP = "300s"
+
+
+console.log('El secreto del token es: ' + process.env.JWT_SECRET);

@@ -4,7 +4,7 @@ var UsuariosSchema = settings.mongoose.Schema(
     
     {
         //username
-        usuario : {type:String, required:[true,'"usuario" es requerido']},
+        username : {type:String, required:[true,'"username" es requerido'], unique : true},
 
         //Clave del usuario
         contraseña : {type:String, required:[true,'"contraseña" es requerido']},
@@ -16,7 +16,7 @@ var UsuariosSchema = settings.mongoose.Schema(
         fechaAlta: {type:Date, required: [true,'"fechaAlta" es requerido']},
 
         //Rol del usuario
-        rol: [{type: settings.mongoose.Schema.Types.ObjectId, ref: 'roles', required: true}],
+        rol: {type:String, enum:['SUPERVISOR','ADMINISTRADOR','OPERADOR'], required:[true,'"rol" es requerido']},
 
     }
 );

@@ -7,6 +7,7 @@ var model = require('../models/preguntas');
 exports.save = function (data, callback) {
 
     model.Preguntas({
+
         type: data.type,
         status : data.status,
         title: data.title,
@@ -17,26 +18,17 @@ exports.save = function (data, callback) {
         adornment : data.adornment,
         questions : data.questions
 
-    }).save().then(function (err, inserted) {
+    }).save(function (err, inserted) {
         callback(err, inserted)
     })
-    
-/*     model.save(function (err, inserted) {
+/*     }).save().then(function (err, inserted) {
         callback(err, inserted)
     }) */
+    
+
 }
 
-// CREAR multiples encuestas
-/* exports.saveMany = function (rows, callback) {
-
-    model.Encuestas.insertMany(rows, function (err, docs) {
-        callback(err, docs)
-    })
-
-} */
-
 // ACTUALIZAR las preguntas agregando una revision
-// http://mongoosejs.com/docs/api.html#model_Model.update
 exports.updatePregunta = function (doc, callback) {
     // Replaced .update() with .updateMany() as .update() is deprecated
     model.Preguntas.findOneAndUpdate(
@@ -47,17 +39,6 @@ exports.updatePregunta = function (doc, callback) {
 } 
 
 // ACTUALIZAR las preguntas modificando una revision
-// http://mongoosejs.com/docs/api.html#model_Model.update
-/* exports.updateRevision = function (criteria, doc,  callback) {
-    // Replaced .update() with .updateMany() as .update() is deprecated
-    model.Preguntas.findOneAndUpdate(
-        criteria,
-        {$set: {"revisiones.revision": doc}}, null , function (err, data) {
-            callback(err, data)
-        }).populate('questions','revisiones')
-} 
- */
-
 exports.updateRevision = function (criteria, doc,  callback) {
     // Replaced .update() with .updateMany() as .update() is deprecated
     model.Preguntas.findOneAndUpdate(criteria,
@@ -65,7 +46,6 @@ exports.updateRevision = function (criteria, doc,  callback) {
             callback(err, data)
         }).populate('questions','revisiones')
 } 
-
 
 
 // RETRIEVE preguntas based on criteria

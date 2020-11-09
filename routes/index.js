@@ -1,7 +1,8 @@
 /* Controllers */
 const preguntasController = require('../controllers/preguntas');
-const encuestasController = require('../controllers/encuestas'); 
+const encuestasController = require('../controllers/encuestas');
 const usuariosController = require('../controllers/usuarios'); 
+const loginController = require('../controllers/login'); 
 
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send({
@@ -24,6 +25,12 @@ module.exports = (app) => {
     app.get('/api/encuesta/:idEncuesta', encuestasController.find);
 
     //Login
-   // app.post('/api/login', usuariosController.post);
+    app.post('/api/login', loginController.login);
+
+    //Obtener lista de usuarios
+    app.post('/api/usuario', usuariosController.create);
+    app.get('/api/usuario', usuariosController.list);
+    app.get('/api/usuario/:username', usuariosController.findByUsername);
+    app.patch('/api/usuario/:idUsuario', usuariosController.patch);
 
 };

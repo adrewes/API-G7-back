@@ -20,7 +20,9 @@ const app = express();
 cron.schedule('0 0 * * *', function() {
 
      //Construyo la fecha del dia anterior en formato "AAAA-MM-DD"
-     let dateObj = new Date();
+     let dateString = new Date().toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" });;
+
+     let dateObj = new Date(dateString);
 
      //Seteo la fecha de ayer
      dateObj.setDate(dateObj.getDate() - 1);
@@ -37,7 +39,7 @@ cron.schedule('0 0 * * *', function() {
      // date as YYYY-MM-DD format
      let dateQuery = year + "-" + month + "-" + date;
 
-     console.log('Ruuning Encuestas Cron Job for date ' + dateQuery);
+     console.log('Runing Encuestas Cron Job for date ' + dateQuery);
      encuestasCron.asyncPollsApiCall(dateQuery)
    });
 
