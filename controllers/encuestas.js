@@ -80,10 +80,10 @@ module.exports = {
 	}, */
 
     patch(req, res) {
-        
-        authController.authenticateToken(req, res, REQUIRED_ROLES)
+        //TODO volver a habilitar
+/*         authController.authenticateToken(req, res, REQUIRED_ROLES)
 
-        if (res.statusCode==200){       
+        if (res.statusCode==200){        */
 
             var doc = req.body;
             encuestas.update({"_id": req.params.idEncuesta}, doc, function (err, doc) {
@@ -98,14 +98,14 @@ module.exports = {
                     res.status(200).send(doc)
                 }
             });
-        }
+        // }
     },
 
 	list(req, res) {
+        //TODO volver a habilitar       
+/*         authController.authenticateToken(req, res, REQUIRED_ROLES)
 
-        authController.authenticateToken(req, res, REQUIRED_ROLES)
-
-        if (res.statusCode==200){      
+        if (res.statusCode==200){       */
 
             return encuestas.list(null,function (err, docs) {
 
@@ -122,14 +122,14 @@ module.exports = {
                     res.send(docs)
                 }
             });
-        }
+        // }
 	},
 
     find(req, res) {
+        //TODO volver a habilitar
+/*         authController.authenticateToken(req, res, REQUIRED_ROLES)
 
-        authController.authenticateToken(req, res, REQUIRED_ROLES)
-
-        if (res.statusCode==200){      
+        if (res.statusCode==200){       */
 
             return encuestas.select({_id:{ $eq: req.params.idEncuesta} },function (err, docs) {
 
@@ -147,5 +147,5 @@ module.exports = {
                 }
             });
         }
-	},
+	// },
 };

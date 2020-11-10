@@ -51,10 +51,10 @@ module.exports = {
         }, */
 
     createRevision(req, res) {
+//TODO volver a habilitar
+/*         authController.authenticateToken(req, res, REQUIRED_ROLES)
 
-        authController.authenticateToken(req, res, REQUIRED_ROLES)
-
-        if (res.statusCode == 200) {
+        if (res.statusCode == 200) { */
             var doc = req.body;
             preguntas.updatePregunta(doc, function (err, doc) {
 
@@ -68,7 +68,7 @@ module.exports = {
                     res.status(201).send(doc)
                 }
             });
-        }
+        // }
     },
 
     /*     patchPregunta(req, res) {
@@ -89,10 +89,10 @@ module.exports = {
         }, */
 
     patchRevision(req, res) {
+        //TODO volver a habilitar   
+/*         authController.authenticateToken(req, res, REQUIRED_ROLES)
 
-        authController.authenticateToken(req, res, REQUIRED_ROLES)
-
-        if (res.statusCode == 200) {
+        if (res.statusCode == 200) { */
             var doc = req.body;
             preguntas.updateRevision({ "_id": doc.idPregunta, "revisiones._id": doc.idRevision }, doc, function (err, doc) {
 
@@ -106,7 +106,7 @@ module.exports = {
                     res.status(200).send(doc)
                 }
             });
-        }
+        // }
     },
 
     /* 	list(_, res) {
