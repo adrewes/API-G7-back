@@ -16,8 +16,8 @@ const app = express();
 /* cron.schedule('* * * * *', function() {
      console.log('running a task every minute');
    }); */
-
-cron.schedule('0 0 * * *', function() {
+cron.schedule('0 1 * * *', function() {
+//cron.schedule('0 1 * * *', function() {
 
      //Construyo la fecha del dia anterior en formato "AAAA-MM-DD"
      let dateString = new Date().toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" });;

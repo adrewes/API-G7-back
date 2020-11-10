@@ -24,6 +24,7 @@ var uri = process.env.DB_URI
 
 //Config para que corra las validaciones de campos en todas las transacciones
 mongoose.set('runValidators', true);
+mongoose.set('useCreateIndex', true);
 
 mongoose.connect(uri, {
     // useMongoClient: true

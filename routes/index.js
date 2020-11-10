@@ -19,7 +19,7 @@ module.exports = (app) => {
     app.patch('/api/pregunta/revision',preguntasController.patchRevision);
 
     //Encuestas
-    app.post('/api/encuesta', encuestasController.create);
+    //app.post('/api/encuesta', encuestasController.create);
     app.patch('/api/encuesta/:idEncuesta', encuestasController.patch);
     app.get('/api/encuesta/', encuestasController.list);
     app.get('/api/encuesta/:idEncuesta', encuestasController.find);
@@ -32,5 +32,6 @@ module.exports = (app) => {
     app.get('/api/usuario', usuariosController.list);
     app.get('/api/usuario/:username', usuariosController.findByUsername);
     app.patch('/api/usuario/:idUsuario', usuariosController.patch);
+    app.delete('/api/usuario/:idUsuario', usuariosController.delete);
 
 };

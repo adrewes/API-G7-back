@@ -45,3 +45,10 @@ exports.selectOne = function (criteria, callback) {
         callback(err, data)
     })
 }
+
+// DELETE usuarios based on criteria
+exports.delete = function (criteria, callback) {
+    model.Usuarios.deleteOne(criteria, function (err, data) {
+        callback(err, data)
+    })
+}

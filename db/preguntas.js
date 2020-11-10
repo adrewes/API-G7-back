@@ -8,6 +8,7 @@ exports.save = function (data, callback) {
 
     model.Preguntas({
 
+        _id: data.id,
         type: data.type,
         status : data.status,
         title: data.title,
