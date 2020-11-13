@@ -7,11 +7,11 @@ module.exports = {
 
 	create(req, res) {
 
-        authController.authenticateToken(req, res, REQUIRED_ROLES)
+        // authController.authenticateToken(req, res, REQUIRED_ROLES)
 
         var doc = req.body;
 
-        if (res.statusCode==200){
+        // if (res.statusCode==200){
 
             usuarios.save(doc,function (err, doc) {
 
@@ -25,16 +25,16 @@ module.exports = {
                     res.status(201).send(doc)
                 }
             });
-        }
+        // }
     },
 
     patch(req, res) {
 
-        authController.authenticateToken(req, res, REQUIRED_ROLES)
+        // authController.authenticateToken(req, res, REQUIRED_ROLES)
 
         var doc = req.body;
 
-        if (res.statusCode==200){
+        // if (res.statusCode==200){
             usuarios.update({_id: req.params.idUsuario}, doc, function (err, doc) {
 
                 if (err) {
@@ -47,14 +47,14 @@ module.exports = {
                     res.status(200).send(doc)
                 }
             });
-        }
+        // }
 	},
 
 	list(req, res) {
 
-        authController.authenticateToken(req, res, REQUIRED_ROLES)
+        // authController.authenticateToken(req, res, REQUIRED_ROLES)
 
-        if (res.statusCode==200){
+        // if (res.statusCode==200){
             return usuarios.select(null,function (err, docs) {
     
                 if (err) {
@@ -69,14 +69,14 @@ module.exports = {
                     res.send(docs)
                 }
             });
-        }
+        // }
 	},
 
     findByUsername(req, res) {
 
-        authController.authenticateToken(req, res, REQUIRED_ROLES)
+        // authController.authenticateToken(req, res, REQUIRED_ROLES)
 
-        if (res.statusCode==200){       
+        // if (res.statusCode==200){       
             return usuarios.selectOne({ username: req.params.username}, function (err, docs) {
 
                 if (err) {
@@ -91,14 +91,14 @@ module.exports = {
                     res.send(docs)
                 }
             });
-        }
+        // }
     },
 
     delete (req, res) {
         
-        authController.authenticateToken(req, res, REQUIRED_ROLES)
+        // authController.authenticateToken(req, res, REQUIRED_ROLES)
 
-        if (res.statusCode==200){       
+        // if (res.statusCode==200){       
             return usuarios.delete({_id: req.params.idUsuario}, function (err, data) {
 
                 if (err) {
@@ -113,7 +113,7 @@ module.exports = {
                     res.sendStatus(200)
                 }
             });
-        }
+        // }
     },
     
 };
