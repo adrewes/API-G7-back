@@ -48,7 +48,7 @@ exports.updateRevision = function (criteria, doc,  callback) {
         }).populate('questions','revisiones')
 } 
 
-// ACTUALIZAR las preguntas modificando una revision
+// ACTUALIZAR las preguntas modificando el estado
 exports.updateEstadoPregunta = function (criteria, doc,  callback) {
     // Replaced .update() with .updateMany() as .update() is deprecated
     model.Preguntas.findOneAndUpdate(

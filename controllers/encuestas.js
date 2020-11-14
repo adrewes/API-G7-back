@@ -94,9 +94,9 @@ module.exports = {
                     // res.send("Error connecting to db")
                     res.send(err)
                 } else {
-                    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
                     res.status(200).send(doc)
                 }
+                res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
             });
         // }
     },
@@ -118,9 +118,9 @@ module.exports = {
                         res.status(404)
                     }
                     console.log("Retrieved encuestas = %d", docs.length)
-                    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
                     res.send(docs)
                 }
+                res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
             });
         // }
 	},
@@ -142,9 +142,9 @@ module.exports = {
                         res.status(404)
                     }
                     console.log("Retrieved encuestas = %d", docs.length)
-                    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
                     res.send(docs)
                 }
+                res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
             });
         }
 	// },

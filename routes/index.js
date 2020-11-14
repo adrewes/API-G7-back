@@ -9,12 +9,12 @@ module.exports = (app) => {
         message: 'Example project did not give you access to the api web services',
     })); 
     
-    //Preguntas
     //TODO No hacen faltas endpoint de preguntas salvo que usemos otro servicio para levantar las encuestas
-/*     app.post('/api/pregunta', preguntasController.create);
-  app.get('/api/pregunta/list/', preguntasController.find);
+    /*     app.post('/api/pregunta', preguntasController.create);
+    app.get('/api/pregunta/list/', preguntasController.find);
     app.patch('/api/pregunta/',preguntasController.patchPregunta); */
-
+    
+    //Preguntas
     app.post('/api/pregunta/revision',preguntasController.createRevision);  
     app.patch('/api/pregunta/revision',preguntasController.patchRevision);
     app.patch('/api/pregunta/:idPregunta/status',preguntasController.aprobarPregunta);
