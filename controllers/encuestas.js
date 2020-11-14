@@ -103,9 +103,9 @@ module.exports = {
 
 	list(req, res) {
         //TODO volver a habilitar       
-/*         authController.authenticateToken(req, res, REQUIRED_ROLES)
+        // authController.authenticateToken(req, res, REQUIRED_ROLES)
 
-        if (res.statusCode==200){       */
+        // if (res.statusCode==200){      
 
             return encuestas.list(null,function (err, docs) {
 

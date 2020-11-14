@@ -66,6 +66,7 @@ module.exports = {
                         res.status(404)
                     }
                     console.log("Retrieved usuarios = %d", docs.length)
+                    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
                     res.send(docs)
                 }
             });
@@ -88,6 +89,7 @@ module.exports = {
                         res.status(404)
                     }
                     console.log("Retrieved usuarios = %d", docs.length)
+                    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
                     res.send(docs)
                 }
             });
@@ -110,6 +112,7 @@ module.exports = {
                     res.sendStatus(404)
                 } else {
                     console.log(data)
+                    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
                     res.sendStatus(200)
                 }
             });
