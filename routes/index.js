@@ -37,7 +37,7 @@ module.exports = (app) => {
     app.delete('/api/usuario/:idUsuario', usuariosController.delete);
 
     app.options('/*', function(req, res, next){
-        res.header('Access-Control-Allow-Origin', 'localhost:3000');
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
         res.sendStatus(200);
     })
 
