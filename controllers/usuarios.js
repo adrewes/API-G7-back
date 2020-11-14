@@ -6,6 +6,8 @@ const REQUIRED_ROLES = ["ADMINISTRADOR"];
 module.exports = {
 
 	create(req, res) {
+        
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 
         // authController.authenticateToken(req, res, REQUIRED_ROLES)
 
@@ -23,7 +25,6 @@ module.exports = {
                 } else {
                     res.status(201).send(doc)
                 }
-                res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
             });
             // }
     },
@@ -31,6 +32,8 @@ module.exports = {
     patch(req, res) {
 
         // authController.authenticateToken(req, res, REQUIRED_ROLES)
+        
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 
         var doc = req.body;
 
@@ -45,12 +48,13 @@ module.exports = {
                 } else {
                     res.status(200).send(doc)
                 }
-                res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
             });
             // }
 	},
 
 	list(req, res) {
+        
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 
         // authController.authenticateToken(req, res, REQUIRED_ROLES)
 
@@ -68,12 +72,13 @@ module.exports = {
                     console.log("Retrieved usuarios = %d", docs.length)
                     res.send(docs)
                 }
-                res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
             });
             // }
 	},
 
     findByUsername(req, res) {
+
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 
         // authController.authenticateToken(req, res, REQUIRED_ROLES)
 
@@ -91,13 +96,14 @@ module.exports = {
                     console.log("Retrieved usuarios = %d", docs.length)
                     res.send(docs)
                 }
-                res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
             });
         // }
     },
 
     delete (req, res) {
         
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+
         // authController.authenticateToken(req, res, REQUIRED_ROLES)
 
         // if (res.statusCode==200){       
@@ -112,7 +118,6 @@ module.exports = {
                     res.sendStatus(404)
                 } else {
                     console.log(data)
-                    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
                     res.sendStatus(200)
                 }
             });

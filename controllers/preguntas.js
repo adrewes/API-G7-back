@@ -51,6 +51,9 @@ module.exports = {
         }, */
 
     createRevision(req, res) {
+
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+
 //TODO volver a habilitar
 /*         authController.authenticateToken(req, res, REQUIRED_ROLES)
 
@@ -70,7 +73,6 @@ module.exports = {
                     // res.send("Error connecting to db")
                     res.send(err)
                 } else {
-                    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
                     res.status(201).send(doc)
                 }
             });
@@ -95,6 +97,9 @@ module.exports = {
         }, */
 
     patchRevision(req, res) {
+        
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+
         //TODO volver a habilitar   
 /*         authController.authenticateToken(req, res, REQUIRED_ROLES)
 
@@ -112,7 +117,6 @@ module.exports = {
                     // res.send("Error connecting to db")
                     res.send(err)
                 } else {
-                    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
                     res.status(200).send(doc)
                 }
             });
@@ -120,6 +124,9 @@ module.exports = {
     },
 
     aprobarPregunta(req, res) {
+
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+
         //TODO volver a habilitar   
 /*         authController.authenticateToken(req, res, REQUIRED_ROLES)
 
@@ -135,7 +142,6 @@ module.exports = {
                     // res.send("Error connecting to db")
                     res.send(err)
                 } else {
-                    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
                     res.status(200).send(doc)
                 }
             });

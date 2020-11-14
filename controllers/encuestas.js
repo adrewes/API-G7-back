@@ -81,11 +81,15 @@ module.exports = {
 
     patch(req, res) {
         //TODO volver a habilitar
+        
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 /*         authController.authenticateToken(req, res, REQUIRED_ROLES)
 
         if (res.statusCode==200){        */
+    
 
             var doc = req.body;
+            
             encuestas.update({"_id": req.params.idEncuesta}, doc, function (err, doc) {
 
                 if (err) {
@@ -96,15 +100,16 @@ module.exports = {
                 } else {
                     res.status(200).send(doc)
                 }
-                res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
             });
         // }
     },
 
 	list(req, res) {
+        
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+
         //TODO volver a habilitar       
         // authController.authenticateToken(req, res, REQUIRED_ROLES)
-
         // if (res.statusCode==200){      
 
             return encuestas.list(null,function (err, docs) {
@@ -120,12 +125,14 @@ module.exports = {
                     console.log("Retrieved encuestas = %d", docs.length)
                     res.send(docs)
                 }
-                res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
             });
         // }
 	},
 
     find(req, res) {
+        
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+
         //TODO volver a habilitar
 /*         authController.authenticateToken(req, res, REQUIRED_ROLES)
 
@@ -144,7 +151,6 @@ module.exports = {
                     console.log("Retrieved encuestas = %d", docs.length)
                     res.send(docs)
                 }
-                res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
             });
         }
 	// },
