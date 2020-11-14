@@ -34,7 +34,7 @@ exports.updatePregunta = function (doc, callback) {
     // Replaced .update() with .updateMany() as .update() is deprecated
     model.Preguntas.findOneAndUpdate(
         {_id : doc.idPregunta},
-        { $push: { revisiones : doc.revision }}, null , function (err, data) {
+        { $push: { revisiones : doc.revision }, $set: {status: "REVISION"}}, null , function (err, data) {
             callback(err, data)
         }).populate('questions','revisiones')
 } 
@@ -43,11 +43,20 @@ exports.updatePregunta = function (doc, callback) {
 exports.updateRevision = function (criteria, doc,  callback) {
     // Replaced .update() with .updateMany() as .update() is deprecated
     model.Preguntas.findOneAndUpdate(criteria,
-        { "revisiones.$": doc.revision}, {new: true, runValidators: true} , function (err, data) {
+        { "revisiones.$.respuestaValidada": doc.revision.respuestaValidada}, {new: true, runValidators: true} , function (err, data) {
             callback(err, data)
         }).populate('questions','revisiones')
 } 
 
+// ACTUALIZAR las preguntas modificando una revision
+exports.updateEstadoPregunta = function (criteria, doc,  callback) {
+    // Replaced .update() with .updateMany() as .update() is deprecated
+    model.Preguntas.findOneAndUpdate(
+        criteria,
+        {$set: {status: doc.status}}, null , function (err, data) {
+            callback(err, data)
+        }).populate('questions','revisiones')
+} 
 
 // RETRIEVE preguntas based on criteria
 exports.select = function (criteria, callback) {

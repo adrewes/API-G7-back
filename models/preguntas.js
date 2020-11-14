@@ -6,7 +6,7 @@ var PreguntasSchema = settings.mongoose.Schema(
         type : {type:String, enum: ['TEXT','NUMBER','SELECT','CHOICE','FILE','GROUPED'], required:[true,'"type" es requerido']},
 
         //Estado de la revision 
-        status: {type:String, enum:['PENDIENTE','EN_REVISION','VALIDADA','APROBADA'], required:[true,'"status" es requerido']},
+        status: {type:String, enum:['PENDIENTE','REVISION','VALIDADA','APROBADA'], required:[true,'"status" es requerido']},
 
         //Titulo de la pregunta
         title: {type:String, required:[true,'"title" es requerido']},
@@ -37,27 +37,27 @@ var PreguntasSchema = settings.mongoose.Schema(
         revisiones: [{
 
             //Estado de la revision 
-            status: {type:String, enum:['REVISION','VALIDADA','APROBADA'], required:[true,'"status" es requerido']},
+            //TODO revisar si hace falta que la revision tenga estado status: {type:String, enum:['REVISION','VALIDADA','APROBADA'], required:[true,'"status" es requerido']},
 
             //Datos de la observacion
             observacion: {
                 //Nombre de usuario que realizo la observacion
-                usuario: {type:String, required:[true,'"usuario" es requerido']},          
+                usuario: {type:String, required: false},      
                 //Mensaje de la observacion
-                mensaje: {type:String, required:[true,'"mensaje" es requerido']},          
+                mensaje: {type:String, required: false},    
                 //Fecha y hora de la creacion de la revision
-                created: {type:Date, required: [true,'"created" es requerido']},
+                created: {type:Date, required: false},
             },
             respuestaValidada: {
                 //Nombre de usuario que realizo la validacion
-                usuario: {type:String, required:[true,'"usuario" es requerido']},          
+                usuario: {type:String, required: false},         
                 //Nuevo valor de la respuesta
-                value: {type:String, required:[true,'"mensaje" es requerido']},            
+                value: {type:String, required: false},        
                 //Fecha y hora de la creacion de la respuesta
-                created: {type:Date, required: [true,'"created" es requerido']},
+                created: {type:Date, required: false},
             }
         }]
-    }
+    }, { timestamps: true }
 );
 
 exports.Preguntas = settings.mongoose.model('preguntas', PreguntasSchema)

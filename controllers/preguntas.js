@@ -55,7 +55,13 @@ module.exports = {
 /*         authController.authenticateToken(req, res, REQUIRED_ROLES)
 
         if (res.statusCode == 200) { */
+            //Construyo la fecha de creacion
+            let dateObj = new Date();
+
             var doc = req.body;
+
+            doc.revision.observacion.created = dateObj
+
             preguntas.updatePregunta(doc, function (err, doc) {
 
                 if (err) {
@@ -93,8 +99,35 @@ module.exports = {
 /*         authController.authenticateToken(req, res, REQUIRED_ROLES)
 
         if (res.statusCode == 200) { */
+
+            let dateObj = new Date();
             var doc = req.body;
+            doc.revision.respuestaValidada.created = dateObj
+
             preguntas.updateRevision({ "_id": doc.idPregunta, "revisiones._id": doc.idRevision }, doc, function (err, doc) {
+
+                if (err) {
+                    console.log(err)
+                    res.status(500)
+                    // res.send("Error connecting to db")
+                    res.send(err)
+                } else {
+                    res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+                    res.status(200).send(doc)
+                }
+            });
+        // }
+    },
+
+    aprobarPregunta(req, res) {
+        //TODO volver a habilitar   
+/*         authController.authenticateToken(req, res, REQUIRED_ROLES)
+
+        if (res.statusCode == 200) { */
+
+            var doc = req.body;
+
+            preguntas.updateEstadoPregunta({_id:{ $eq: req.params.idPregunta} }, doc, function (err, doc) {
 
                 if (err) {
                     console.log(err)
