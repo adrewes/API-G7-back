@@ -3,6 +3,7 @@ const preguntasController = require('../controllers/preguntas');
 const encuestasController = require('../controllers/encuestas');
 const usuariosController = require('../controllers/usuarios'); 
 const authController = require('../controllers/authentication'); 
+const corsController = require('../controllers/authentication'); 
 
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send({
@@ -34,5 +35,10 @@ module.exports = (app) => {
     app.get('/api/usuario/:username', usuariosController.findByUsername);
     app.patch('/api/usuario/:idUsuario', usuariosController.patch);
     app.delete('/api/usuario/:idUsuario', usuariosController.delete);
+
+    app.options('/*', function(req, res, next){
+        res.header('Access-Control-Allow-Origin', 'localhost:3000');
+        res.sendStatus(200);
+    })
 
 };

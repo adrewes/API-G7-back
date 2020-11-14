@@ -8,6 +8,7 @@ module.exports = {
 	create(req, res) {
         
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+        res.header('Access-Control-Allow-Origin','https://react-http-post-request-examples-axios.stackblitz.io')
 
         // authController.authenticateToken(req, res, REQUIRED_ROLES)
 
