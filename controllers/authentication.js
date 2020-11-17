@@ -7,6 +7,8 @@ module.exports = {
 
         var doc = req.body;
 
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+        
         usuarios.selectOne({username: doc.username, contraseña: doc.contraseña}, function (err, data) {
 
             if (err) {
