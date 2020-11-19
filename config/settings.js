@@ -14,9 +14,12 @@ const DB_NAME = "encuestas"
 const CLUSTER_HOST = "fundacion-pyme.3haxh.mongodb.net"
 
 // Setup the DB URI
+//TODO Ver como parametrizar todo lo que va en proccess.env
 process.env.DB_URI = "mongodb+srv://"+DB_USER+":"+DB_PASSWORD+"@"+CLUSTER_HOST+"/"+DB_NAME+"?retryWrites=true&w=majority"
 
 var uri = process.env.DB_URI
+
+process.env.UPLOAD_DIR= "files/"
 //var uri = "mongodb+srv://admin:admin@fundacion-pyme.3haxh.mongodb.net/encuestas?retryWrites=true&w=majority"
 
 // No need to provid ethe user /password separately its part of the URI

@@ -3,7 +3,7 @@ const preguntasController = require('../controllers/preguntas');
 const encuestasController = require('../controllers/encuestas');
 const usuariosController = require('../controllers/usuarios'); 
 const authController = require('../controllers/authentication'); 
-const corsController = require('../controllers/authentication'); 
+const fileUploadController = require('../controllers/fileUpload'); 
 
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send({
@@ -42,5 +42,8 @@ module.exports = (app) => {
         res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
         res.send(200);
     })
+
+    //Endpoints para subir archivos de las encuestas
+    app.post('/api/upload', fileUploadController.uploadFiles);
 
 };

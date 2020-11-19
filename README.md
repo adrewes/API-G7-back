@@ -9,3 +9,5 @@ npm install mongoose-id-validator
 npm install node-cron
 npm install axios
 npm install jsonwebtoken
+npm install formidable
+npm install bluebird
