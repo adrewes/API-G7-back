@@ -3,6 +3,7 @@ const bluebird = require('bluebird')
 var fs = require('fs');
 var fs = bluebird.promisifyAll(require('fs'))
 var { join } = require('path');
+var fileService = require ('../services/fileService')
 
 
 
@@ -75,11 +76,18 @@ exports.uploadFiles = async function (req, res, next) {
                 return res.json({ ok: false, msg: 'The sent file is not a valid type' })
             }
             const fileName = encodeURIComponent(file.name.replace(/&. *;+/g, '-'))
-            myUploadedFiles.push(fileName)
             try {
                 await fs.renameAsync(file.path, join(uploadsFolder, fileName))
+                urlFile = await fileService.createFile(fileName)
+                var fileData = {
+                    name : fileName,
+                    url : urlFile
+                }
+                myUploadedFiles.push(fileData)
+
             } catch (e) {
-                console.log('Error uploading the file')
+                console.log('Error uploading the file:')
+                console.log(e)
                 try { await fs.unlinkAsync(file.path) } catch (e) { }
                 return res.json({ ok: false, msg: 'Error uploading the file' })
             }
@@ -91,9 +99,15 @@ exports.uploadFiles = async function (req, res, next) {
                     return res.json({ ok: false, msg: 'The sent file is not a valid type' })
                 }
                 const fileName = encodeURIComponent(file.name.replace(/&. *;+/g, '-'))
-                myUploadedFiles.push(fileName)
+
                 try {
                     await fs.renameAsync(file.path, join(uploadsFolder, fileName))
+                    urlFile = await fileService.createFile(fileName)
+                    var fileData = {
+                        name : fileName,
+                        url : urlFile
+                    }
+                    myUploadedFiles.push(fileData)
                 } catch (e) {
                     console.log('Error uploading the file')
                     try { await fs.unlinkAsync(file.path) } catch (e) { }

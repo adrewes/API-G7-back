@@ -11,3 +11,4 @@ npm install axios
 npm install jsonwebtoken
 npm install formidable
 npm install bluebird
+npm install cloudinary
