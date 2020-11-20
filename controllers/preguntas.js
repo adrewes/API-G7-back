@@ -16,6 +16,7 @@ module.exports = {
             value: pregunta.type == "FILE" ? "http://www.uade.edu.ar/"+"pregunta.value[0].name" : pregunta.value,
             lastValue: pregunta.type == "FILE" ? "http://www.uade.edu.ar/"+"pregunta.value[0].name" : pregunta.value,
             mandatory: pregunta.mandatory,
+            options: pregunta.options,
             multiline: pregunta.multiline,
             restrictions: pregunta.restrictions,
             adornment: pregunta.adornment,
@@ -59,7 +60,9 @@ module.exports = {
 
             if (res.statusCode == 200) {
                 //Construyo la fecha de creacion
-                let dateObj = new Date();
+                let dateString = new Date().toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" });;
+
+                let dateObj = new Date(dateString);
     
                 var doc = req.body;
     
@@ -106,7 +109,9 @@ module.exports = {
             
             if (res.statusCode == 200) {
     
-                let dateObj = new Date();
+                let dateString = new Date().toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" });;
+
+                let dateObj = new Date(dateString);
                 var doc = req.body;
                 doc.revision.respuestaValidada.created = dateObj
     
