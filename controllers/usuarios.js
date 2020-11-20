@@ -155,6 +155,8 @@ module.exports = {
 
     delete(req, res) {
 
+        const REQUIRED_ROLES = ["ADMINISTRADOR"];
+
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 
         authController.authenticateToken(req, res, REQUIRED_ROLES, function (err, data) {
