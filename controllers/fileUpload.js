@@ -4,6 +4,7 @@ var fs = require('fs');
 var fs = bluebird.promisifyAll(require('fs'))
 var { join } = require('path');
 var fileService = require('../services/fileService')
+const authController = require('../controllers/authentication'); 
 
 
 
