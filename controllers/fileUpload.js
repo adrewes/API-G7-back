@@ -43,7 +43,7 @@ function checkAcceptedExtensions(file) {
 
 exports.uploadFiles = async function (req, res, next) {
 
-    const REQUIRED_ROLES = ["SUPERVISOR", "OPERADOR"];
+    const REQUIRED_ROLES = ["OPERADOR"];
 
     res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 
