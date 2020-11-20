@@ -12,8 +12,10 @@ var PreguntasSchema = settings.mongoose.Schema(
         title: {type:String, required:[true,'"title" es requerido']},
 
         //Valor completado por la empresa
-        //TODO Ver el caso de archivos
         value: {type:String, required:false},
+
+        //Valor revisado por el operador
+        lastValue: {type:String, required:false},
 
         //Obligatoriedad de la pregunta
         mandatory: {type:Boolean, required:true, default:false},

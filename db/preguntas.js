@@ -43,7 +43,7 @@ exports.updatePregunta = function (doc, callback) {
 exports.updateRevision = function (criteria, doc,  callback) {
     // Replaced .update() with .updateMany() as .update() is deprecated
     model.Preguntas.findOneAndUpdate(criteria,
-        { "revisiones.$.respuestaValidada": doc.revision.respuestaValidada, $set: {status: "VALIDADA"}}, {new: true, runValidators: true} , function (err, data) {
+        { "revisiones.$.respuestaValidada": doc.revision.respuestaValidada, $set: {status: "VALIDADA"}, $set: {lastValue: doc.revision.respuestaValidada.value}}, {new: true, runValidators: true} , function (err, data) {
             callback(err, data)
         }).populate('questions','revisiones')
 } 
