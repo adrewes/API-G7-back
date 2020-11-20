@@ -76,14 +76,20 @@ module.exports = {
             // }
 	},
 
-    findByUsername(req, res) {
+    find(req, res) {
 
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+ 
+        var payload; 
 
-        // authController.authenticateToken(req, res, REQUIRED_ROLES)
+        authController.authenticateToken(req, res, null, function (err, data){
+            payload = data
+        })
+        
+        if (res.statusCode==200){       
+            console.log(payload.userId)
 
-        // if (res.statusCode==200){       
-            return usuarios.selectOne({ username: req.params.username}, function (err, docs) {
+            return usuarios.selectOne({ _id: payload.userId}, function (err, docs) {
 
                 if (err) {
                     console.log(err)
@@ -97,7 +103,7 @@ module.exports = {
                     res.send(docs)
                 }
             });
-        // }
+        }
     },
 
     delete (req, res) {

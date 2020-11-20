@@ -55,7 +55,7 @@ exports.db = mongoose.connection;
 //Seteo el secreto para la generacion y validacion de jwt
 process.env.JWT_SECRET = require('crypto').randomBytes(64).toString('hex')
 
-//Seteo el tiempo de expiracion del token (5 minutos)
-process.env.JWT_EXP = "300s"
+//Seteo el tiempo de expiracion del token (15 minutos)
+process.env.JWT_EXP = "900s"
 
 console.log('El secreto del token es: ' + process.env.JWT_SECRET);

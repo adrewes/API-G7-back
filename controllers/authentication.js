@@ -43,7 +43,7 @@ module.exports = {
 
     },
 
-    authenticateToken(req, res, roles) {
+    authenticateToken(req, res, roles,callback) {
 
         // Gather the jwt access token from the request header
         const authHeader = req.headers['authorization']
@@ -57,7 +57,7 @@ module.exports = {
                 console.log(err)
     
                 //Si el rol no coincide con el que se tiene que validar devuelvo error
-                if (err || !roles.includes(payload.role)) return res.sendStatus(403)
+                if (err || (roles != null && !roles.includes(payload.role))) return res.sendStatus(403)
     
                 //Checkeo si el usuario con el id que viene en el token existe
                 usuarios.selectOne({ _id: payload.userId}, function (err, data) {
@@ -71,6 +71,8 @@ module.exports = {
                         res.status(401)
                     }
                 })
+                callback(err,payload)
+
             })
         }
     
