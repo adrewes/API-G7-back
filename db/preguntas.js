@@ -14,6 +14,7 @@ exports.save = function (data, callback) {
         title: data.title,
         value: data.value,
         mandatory: data.mandatory,
+        options: data.options,
         multiline: data.multiline,
         restrictions : data.restrictions,
         adornment : data.adornment,

@@ -2,6 +2,8 @@ const express        = require('express');
 const logger         = require('morgan');
 const bodyParser     = require('body-parser');
 const encuestasCron  = require('./controllers/encuestas-cron');
+const morgan = require("morgan");
+
 
 // This will be our application entry. We'll setup our server here.
 const http = require('http');
@@ -13,10 +15,8 @@ const cron = require('node-cron');
 const app = express();
 
 // Schedule tasks to be run on the server.
-/* cron.schedule('* * * * *', function() {
-     console.log('running a task every minute');
-   }); */
-cron.schedule('0 1 * * *', function() {
+cron.schedule('* * * * *', function() {
+    console.log('running a task every minute');
 //cron.schedule('0 1 * * *', function() {
 
      //Construyo la fecha del dia anterior en formato "AAAA-MM-DD"
@@ -40,7 +40,9 @@ cron.schedule('0 1 * * *', function() {
      let dateQuery = year + "-" + month + "-" + date;
 
      console.log('Runing Encuestas Cron Job for date ' + dateQuery);
-     encuestasCron.asyncPollsApiCall(dateQuery)
+    //  encuestasCron.asyncPollsApiCall(dateQuery)
+    encuestasCron.asyncPollsApiCall("2020-10-20")
+     
    }, "America/Argentina/Buenos_Aires");
 
 

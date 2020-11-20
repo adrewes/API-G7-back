@@ -19,7 +19,10 @@ var PreguntasSchema = settings.mongoose.Schema(
 
         //Obligatoriedad de la pregunta
         mandatory: {type:Boolean, required:true, default:false},
-        
+ 
+        //Obligatoriedad de la pregunta
+        options: [{type:String, required:false}],
+
         //Indica se permite el ingeso de valores con saltos de linea
         multiline: {type:Boolean, required:true, default:false},
         
