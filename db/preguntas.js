@@ -13,6 +13,7 @@ exports.save = function (data, callback) {
         status : data.status,
         title: data.title,
         value: data.value,
+        lastValue: pregunta.value,
         mandatory: data.mandatory,
         options: data.options,
         multiline: data.multiline,

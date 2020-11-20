@@ -14,7 +14,6 @@ module.exports = {
             status: pregunta.status ? pregunta.status : "PENDIENTE",
             title: pregunta.title,
             value: pregunta.type == "FILE" ? "http://www.uade.edu.ar/"+ pregunta.value[0].name : pregunta.value,
-            lastValue: pregunta.type == "FILE" ? "http://www.uade.edu.ar/"+ pregunta.value[0].name : pregunta.value,
             mandatory: pregunta.mandatory,
             options: pregunta.options,
             multiline: pregunta.multiline,
