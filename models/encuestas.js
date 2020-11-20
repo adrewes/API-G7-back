@@ -20,7 +20,7 @@ var EncuestasSchema = settings.mongoose.Schema(
         },
 
         //Estado de la encuesta 
-        status: {type:String, enum:['COMPLETE','REVISION','APROBADA','RECHAZADA'], required:[true,'"status" es requerido']},
+        status: {type:String, enum:['COMPLETE','VALIDADA','REVISION','APROBADA','RECHAZADA'], required:[true,'"status" es requerido']},
 
         //Fecha de envio de la encuesta
         created: {type:Date, required: [true,'"created" es requerido']},
