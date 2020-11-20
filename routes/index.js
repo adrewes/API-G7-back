@@ -32,7 +32,7 @@ module.exports = (app) => {
     //Obtener lista de usuarios
     app.post('/api/usuario', usuariosController.create);
     app.get('/api/usuario/list', usuariosController.list);
-    app.get('/api/usuario', usuariosController.findById);
+    app.get('/api/usuario', usuariosController.find);
     app.patch('/api/usuario/:idUsuario', usuariosController.patch);
     app.delete('/api/usuario/:idUsuario', usuariosController.delete);
 
