@@ -55,6 +55,8 @@ module.exports = {
     createRevision(req, res) {
 
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+        
+        console.log("Request: " + req)
 
         authController.authenticateToken(req, res, REQUIRED_ROLES, function (err, data){
 
@@ -103,6 +105,8 @@ module.exports = {
 
     patchRevision(req, res) {
         
+        console.log("Request: " + req)
+
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 
         authController.authenticateToken(req, res, REQUIRED_ROLES, function (err, data){
@@ -123,6 +127,7 @@ module.exports = {
                         // res.send("Error connecting to db")
                         res.send(err)
                     } else {
+
                         res.status(200).send(doc)
                     }
                 });
