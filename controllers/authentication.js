@@ -43,7 +43,7 @@ module.exports = {
 
     },
 
-    authenticateToken(req, res, roles,callback) {
+    authenticateToken(req, res, roles, callback) {
 
         // Gather the jwt access token from the request header
         const authHeader = req.headers['authorization']

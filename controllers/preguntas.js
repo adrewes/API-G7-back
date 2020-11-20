@@ -54,29 +54,30 @@ module.exports = {
 
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 
-//TODO volver a habilitar
-/*         authController.authenticateToken(req, res, REQUIRED_ROLES)
+        authController.authenticateToken(req, res, REQUIRED_ROLES, function (err, data){
 
-        if (res.statusCode == 200) { */
-            //Construyo la fecha de creacion
-            let dateObj = new Date();
+            if (res.statusCode == 200) {
+                //Construyo la fecha de creacion
+                let dateObj = new Date();
+    
+                var doc = req.body;
+    
+                doc.revision.observacion.created = dateObj
+    
+                preguntas.updatePregunta(doc, function (err, doc) {
+    
+                    if (err) {
+                        console.log(err)
+                        res.status(500)
+                        // res.send("Error connecting to db")
+                        res.send(err)
+                    } else {
+                        res.status(201).send(doc)
+                    }
+                });
+            }
+        })
 
-            var doc = req.body;
-
-            doc.revision.observacion.created = dateObj
-
-            preguntas.updatePregunta(doc, function (err, doc) {
-
-                if (err) {
-                    console.log(err)
-                    res.status(500)
-                    // res.send("Error connecting to db")
-                    res.send(err)
-                } else {
-                    res.status(201).send(doc)
-                }
-            });
-        // }
     },
 
     /*     patchPregunta(req, res) {
@@ -100,52 +101,53 @@ module.exports = {
         
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 
-        //TODO volver a habilitar   
-/*         authController.authenticateToken(req, res, REQUIRED_ROLES)
+        authController.authenticateToken(req, res, REQUIRED_ROLES, function (err, data){
+            
+            if (res.statusCode == 200) {
+    
+                let dateObj = new Date();
+                var doc = req.body;
+                doc.revision.respuestaValidada.created = dateObj
+    
+                preguntas.updateRevision({ "_id": doc.idPregunta, "revisiones._id": doc.idRevision }, doc, function (err, doc) {
+    
+                    if (err) {
+                        console.log(err)
+                        res.status(500)
+                        // res.send("Error connecting to db")
+                        res.send(err)
+                    } else {
+                        res.status(200).send(doc)
+                    }
+                });
+            }
+        })
 
-        if (res.statusCode == 200) { */
-
-            let dateObj = new Date();
-            var doc = req.body;
-            doc.revision.respuestaValidada.created = dateObj
-
-            preguntas.updateRevision({ "_id": doc.idPregunta, "revisiones._id": doc.idRevision }, doc, function (err, doc) {
-
-                if (err) {
-                    console.log(err)
-                    res.status(500)
-                    // res.send("Error connecting to db")
-                    res.send(err)
-                } else {
-                    res.status(200).send(doc)
-                }
-            });
-        // }
     },
 
     aprobarPregunta(req, res) {
 
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 
-        //TODO volver a habilitar   
-/*         authController.authenticateToken(req, res, REQUIRED_ROLES)
+        authController.authenticateToken(req, res, REQUIRED_ROLES, function (err, data){
+            if (res.statusCode == 200) {
+    
+                var doc = req.body;
+    
+                preguntas.updateEstadoPregunta({_id:{ $eq: req.params.idPregunta} }, doc, function (err, doc) {
+    
+                    if (err) {
+                        console.log(err)
+                        res.status(500)
+                        // res.send("Error connecting to db")
+                        res.send(err)
+                    } else {
+                        res.status(200).send(doc)
+                    }
+                });
+            }
+        })
 
-        if (res.statusCode == 200) { */
-
-            var doc = req.body;
-
-            preguntas.updateEstadoPregunta({_id:{ $eq: req.params.idPregunta} }, doc, function (err, doc) {
-
-                if (err) {
-                    console.log(err)
-                    res.status(500)
-                    // res.send("Error connecting to db")
-                    res.send(err)
-                } else {
-                    res.status(200).send(doc)
-                }
-            });
-        // }
     },
 
     /* 	list(_, res) {

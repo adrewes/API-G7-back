@@ -80,78 +80,81 @@ module.exports = {
 	}, */
 
     patch(req, res) {
-        //TODO volver a habilitar
         
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
-/*         authController.authenticateToken(req, res, REQUIRED_ROLES)
-
-        if (res.statusCode==200){        */
+        authController.authenticateToken(req, res, REQUIRED_ROLES ,function (err, data){
+            if (res.statusCode==200){
+        
     
+                var doc = req.body;
+                
+                encuestas.update({"_id": req.params.idEncuesta}, doc, function (err, doc) {
+    
+                    if (err) {
+                        console.log(err)
+                        res.status(500)
+                        // res.send("Error connecting to db")
+                        res.send(err)
+                    } else {
+                        res.status(200).send(doc)
+                    }
+                });
+            }
+        })
 
-            var doc = req.body;
-            
-            encuestas.update({"_id": req.params.idEncuesta}, doc, function (err, doc) {
-
-                if (err) {
-                    console.log(err)
-                    res.status(500)
-                    // res.send("Error connecting to db")
-                    res.send(err)
-                } else {
-                    res.status(200).send(doc)
-                }
-            });
-        // }
     },
 
 	list(req, res) {
         
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
+  
+        authController.authenticateToken(req, res, REQUIRED_ROLES, function (err, data){
 
-        //TODO volver a habilitar       
-        // authController.authenticateToken(req, res, REQUIRED_ROLES)
-        // if (res.statusCode==200){      
-
-            return encuestas.list(null,function (err, docs) {
-
-                if (err) {
-                    console.log(err)
-                    res.status(500)
-                    res.send("Error connecting to db")
-                } else {
-                    if (docs.length == 0) {
-                        res.status(404)
+            if (res.statusCode==200){      
+    
+                return encuestas.list(null,function (err, docs) {
+    
+                    if (err) {
+                        console.log(err)
+                        res.status(500)
+                        res.send("Error connecting to db")
+                    } else {
+                        if (docs.length == 0) {
+                            res.status(404)
+                        }
+                        console.log("Retrieved encuestas = %d", docs.length)
+                        res.send(docs)
                     }
-                    console.log("Retrieved encuestas = %d", docs.length)
-                    res.send(docs)
-                }
-            });
-        // }
+                });
+            }
+        })
 	},
 
     find(req, res) {
         
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 
-        //TODO volver a habilitar
-/*         authController.authenticateToken(req, res, REQUIRED_ROLES)
+        authController.authenticateToken(req, res, REQUIRED_ROLES, function (err, data){
 
-        if (res.statusCode==200){       */
-
-            return encuestas.select({_id:{ $eq: req.params.idEncuesta} },function (err, docs) {
-
-                if (err) {
-                    console.log(err)
-                    res.status(500)
-                    res.send("Error connecting to db")
-                } else {
-                    if (docs.length == 0) {
-                        res.status(404)
+            if (res.statusCode==200){      
+    
+                return encuestas.select({_id:{ $eq: req.params.idEncuesta} },function (err, docs) {
+    
+                    if (err) {
+                        console.log(err)
+                        res.status(500)
+                        res.send("Error connecting to db")
+                    } else {
+                        if (docs.length == 0) {
+                            res.status(404)
+                        }
+                        console.log("Retrieved encuestas = %d", docs.length)
+                        res.send(docs)
                     }
-                    console.log("Retrieved encuestas = %d", docs.length)
-                    res.send(docs)
-                }
-            });
-        }
-	// },
+                });
+            }
+
+        })
+
+	 },
 };
