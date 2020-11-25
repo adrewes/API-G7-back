@@ -15,8 +15,7 @@ const cron = require('node-cron');
 const app = express();
 
 // Schedule tasks to be run on the server.
-//cron.schedule('0 1 * * *', function() {
-cron.schedule('* * * * *', function() {
+cron.schedule('0 1 * * *', function() {
 
      //Construyo la fecha del dia anterior en formato "AAAA-MM-DD"
      let dateString = new Date().toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" });;
@@ -39,8 +38,7 @@ cron.schedule('* * * * *', function() {
      let dateQuery = year + "-" + month + "-" + date;
 
      console.log('Runing Encuestas Cron Job for date ' + dateQuery);
-    // encuestasCron.asyncPollsApiCall(dateQuery)
-    encuestasCron.asyncPollsApiCall('2020-10-28')
+    encuestasCron.asyncPollsApiCall(dateQuery)
      
    }, "America/Argentina/Buenos_Aires");
 
