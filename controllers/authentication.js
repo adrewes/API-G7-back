@@ -1,6 +1,5 @@
 const usuarios = require('../db/usuarios'); 
 const jwt = require("jsonwebtoken");
-const authController = require('../controllers/authentication'); 
 
 module.exports = {
 
