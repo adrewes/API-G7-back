@@ -1,11 +1,29 @@
 var preguntas = require('../db/preguntas')
 const authController = require('../controllers/authentication'); 
+var mongoose = require('mongoose')
 
 const REQUIRED_ROLES = ["SUPERVISOR", "OPERADOR"];
 
 module.exports = {
 
     createPreguntaInternal(pregunta, callback) {
+
+        if (pregunta.type=='GROUPED'){
+            var preguntasArray = []
+
+            for (let preguntaHija of pregunta.questions){
+                preguntaHija.id = mongoose.Types.ObjectId();
+                this.createPreguntaInternal(preguntaHija,function (err, doc) {
+
+                    if (err) {
+                        console.log(err)
+                        throw (err)
+                    }                        
+                });
+
+                preguntasArray.push(preguntaHija.id);
+            }
+        }
 
         var preguntaModel = {
 
@@ -19,7 +37,7 @@ module.exports = {
             multiline: pregunta.multiline,
             restrictions: pregunta.restrictions,
             adornment: pregunta.adornment,
-            questions: pregunta.questions
+            questions: preguntasArray
         }
 
         preguntas.save(preguntaModel, function (err, doc) {

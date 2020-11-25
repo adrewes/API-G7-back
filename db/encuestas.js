@@ -62,5 +62,10 @@ exports.list = function (criteria, callback) {
 exports.select = function (criteria, callback) {
     model.Encuestas.find(criteria, function (err, data) {
         callback(err, data)
-    }).populate("sections.questions")
+    }).populate({
+        path: "sections.questions", // populate questions
+        populate: {
+           path: "questions" // in questions, populate questions
+        }
+     })
 }

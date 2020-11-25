@@ -36,7 +36,7 @@ var PreguntasSchema = settings.mongoose.Schema(
         adornment: {type:String, required:false},
 
         //Preguntas en el caso de que sea multiline
-        questions: [this],
+        questions: [{type: settings.mongoose.Schema.Types.ObjectId, ref: 'preguntas', required: true}],
 
         //Revisiones
         revisiones: [{

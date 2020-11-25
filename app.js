@@ -1,7 +1,7 @@
-const express = require('express');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
-const encuestasCron = require('./controllers/encuestas-cron');
+const express        = require('express');
+const logger         = require('morgan');
+const bodyParser     = require('body-parser');
+const encuestasCron  = require('./controllers/encuestas-cron');
 const morgan = require("morgan");
 
 
@@ -15,32 +15,34 @@ const cron = require('node-cron');
 const app = express();
 
 // Schedule tasks to be run on the server.
-cron.schedule('0 1 * * *', function() {
+//cron.schedule('0 1 * * *', function() {
+cron.schedule('* * * * *', function() {
 
-    //Construyo la fecha del dia anterior en formato "AAAA-MM-DD"
-    let dateString = new Date().toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" });;
+     //Construyo la fecha del dia anterior en formato "AAAA-MM-DD"
+     let dateString = new Date().toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" });;
 
-    let dateObj = new Date(dateString);
+     let dateObj = new Date(dateString);
 
-    //Seteo la fecha de ayer
-    dateObj.setDate(dateObj.getDate() - 1);
+     //Seteo la fecha de ayer
+     dateObj.setDate(dateObj.getDate() - 1);
 
-    // year as (YYYY) format
-    let year = dateObj.getFullYear();
+     // year as (YYYY) format
+     let year = dateObj.getFullYear();
 
-    // month as (MM) format
-    let month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
+     // month as (MM) format
+     let month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
 
-    // date as (DD) format
-    let date = ("0" + dateObj.getDate()).slice(-2);
+     // date as (DD) format
+     let date = ("0" + dateObj.getDate()).slice(-2);
 
-    // date as YYYY-MM-DD format
-    let dateQuery = year + "-" + month + "-" + date;
+     // date as YYYY-MM-DD format
+     let dateQuery = year + "-" + month + "-" + date;
 
-    console.log('Runing Encuestas Cron Job for date ' + dateQuery);
-    encuestasCron.asyncPollsApiCall(dateQuery)
-
-}, "America/Argentina/Buenos_Aires");
+     console.log('Runing Encuestas Cron Job for date ' + dateQuery);
+    // encuestasCron.asyncPollsApiCall(dateQuery)
+    encuestasCron.asyncPollsApiCall('2020-10-28')
+     
+   }, "America/Argentina/Buenos_Aires");
 
 
 
