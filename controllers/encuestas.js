@@ -13,8 +13,6 @@ module.exports = {
 
     createEncuestaInternal(encuesta) {
 
-
-
         var encuestaModel = {
 
             idEncuesta: encuesta.id,
