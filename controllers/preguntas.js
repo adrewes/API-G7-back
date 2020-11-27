@@ -1,5 +1,5 @@
 var preguntas = require('../db/preguntas')
-const authController = require('../controllers/authentication'); 
+const authController = require('../controllers/authentication');
 var mongoose = require('mongoose')
 
 const REQUIRED_ROLES = ["SUPERVISOR", "OPERADOR"];
@@ -8,17 +8,17 @@ module.exports = {
 
     createPreguntaInternal(pregunta, callback) {
 
-        if (pregunta.type=='GROUPED'){
+        if (pregunta.type == 'GROUPED') {
             var preguntasArray = []
 
-            for (let preguntaHija of pregunta.questions){
+            for (let preguntaHija of pregunta.questions) {
                 preguntaHija.id = mongoose.Types.ObjectId();
-                this.createPreguntaInternal(preguntaHija,function (err, doc) {
+                this.createPreguntaInternal(preguntaHija, function (err, doc) {
 
                     if (err) {
                         console.log(err)
                         throw (err)
-                    }                        
+                    }
                 });
 
                 preguntasArray.push(preguntaHija.id);
@@ -27,11 +27,11 @@ module.exports = {
 
         var preguntaModel = {
 
-            id: pregunta.id, 
+            id: pregunta.id,
             type: pregunta.type,
             status: pregunta.status ? pregunta.status : "PENDIENTE",
             title: pregunta.title,
-            value: pregunta.type == "FILE" ? "http://www.uade.edu.ar/"+ pregunta.value[0].name : pregunta.value,
+            value: pregunta.type == "FILE" ? "http://www.uade.edu.ar/" + pregunta.value[0].name : pregunta.value,
             mandatory: pregunta.mandatory,
             options: pregunta.options,
             multiline: pregunta.multiline,
@@ -73,27 +73,40 @@ module.exports = {
 
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 
-        authController.authenticateToken(req, res, REQUIRED_ROLES, function (err, data){
+        authController.authenticateToken(req, res, REQUIRED_ROLES, function (err, data) {
 
             if (res.statusCode == 200) {
                 //Construyo la fecha de creacion
                 let dateString = new Date().toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" });;
 
                 let dateObj = new Date(dateString);
-    
+
                 var doc = req.body;
-    
+
                 doc.revision.observacion.created = dateObj
-    
+
                 preguntas.updatePregunta(doc, function (err, doc) {
-    
+
                     if (err) {
                         console.log(err)
                         res.status(500)
                         // res.send("Error connecting to db")
                         res.send(err)
                     } else {
-                        res.status(201).send(doc)
+                        //Me fijo si es una pregunta que está adentro de una grouped
+                        preguntas.updateEstadoPregunta({ "questions": { $eq: req.body.idPregunta } }, { status: 'REVISION' }, function (err, doc) {
+
+                            if (err) {
+                                console.log(err)
+                                res.status(500)
+                                // res.send("Error connecting to db")
+                                res.send(err)
+                            } else {
+                                console.log("Se actualizó la pregunta padre")
+
+                            }
+                        })
+                        res.sendStatus(201)
                     }
                 });
             }
@@ -102,10 +115,10 @@ module.exports = {
     },
 
     /*     patchPregunta(req, res) {
-    
+     
             var doc = req.body;
             preguntas.updatePregunta(doc,function (err, doc) {
-    
+     
                 if (err) {
                     console.log(err)
                     res.status(500)
@@ -119,29 +132,41 @@ module.exports = {
         }, */
 
     patchRevision(req, res) {
-    
+
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 
-        authController.authenticateToken(req, res, REQUIRED_ROLES, function (err, data){
-            
+        authController.authenticateToken(req, res, REQUIRED_ROLES, function (err, data) {
+
             if (res.statusCode == 200) {
-    
+
                 let dateString = new Date().toLocaleString("en-US", { timeZone: "America/Argentina/Buenos_Aires" });;
 
                 let dateObj = new Date(dateString);
                 var doc = req.body;
                 doc.revision.respuestaValidada.created = dateObj
-    
+
                 preguntas.updateRevision({ "_id": doc.idPregunta, "revisiones._id": doc.idRevision }, doc, function (err, doc) {
-    
+
                     if (err) {
                         console.log(err)
                         res.status(500)
                         // res.send("Error connecting to db")
                         res.send(err)
                     } else {
+                        //Me fijo si es una pregunta que está adentro de una grouped
+                        preguntas.updateEstadoPregunta({ "questions": { $eq: req.body.idPregunta } }, { status: 'VALIDADA' }, function (err, doc) {
 
-                        res.status(200).send(doc)
+                            if (err) {
+                                console.log(err)
+                                res.status(500)
+                                // res.send("Error connecting to db")
+                                res.send(err)
+                            } else {
+                                console.log("Se actualizó la pregunta padre")
+
+                            }
+                        })
+                        res.sendStatus(200)
                     }
                 });
             }
@@ -153,13 +178,13 @@ module.exports = {
 
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
 
-        authController.authenticateToken(req, res, REQUIRED_ROLES, function (err, data){
+        authController.authenticateToken(req, res, REQUIRED_ROLES, function (err, data) {
             if (res.statusCode == 200) {
-    
+
                 var doc = req.body;
-    
-                preguntas.updateEstadoPregunta({_id:{ $eq: req.params.idPregunta} }, doc, function (err, doc) {
-    
+
+                preguntas.updateEstadoPregunta({ _id: { $eq: req.params.idPregunta } }, doc, function (err, doc) {
+
                     if (err) {
                         console.log(err)
                         res.status(500)

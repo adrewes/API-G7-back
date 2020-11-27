@@ -76,6 +76,7 @@ exports.uploadFiles = async function (req, res, next) {
                 const file = files.files
                 if (!checkAcceptedExtensions(file)) {
                     console.log('The received file is not a valid type')
+                    res.status(400)
                     return res.json({ ok: false, msg: 'The sent file is not a valid type' })
                 }
                 const fileName = encodeURIComponent(file.name.replace(/&. *;+/g, '-'))
@@ -92,6 +93,7 @@ exports.uploadFiles = async function (req, res, next) {
                     console.log('Error uploading the file:')
                     console.log(e)
                     try { await fs.unlinkAsync(file.path) } catch (e) { }
+                    res.status(400)
                     return res.json({ ok: false, msg: 'Error uploading the file' })
                 }
             } else {
@@ -99,6 +101,7 @@ exports.uploadFiles = async function (req, res, next) {
                     const file = files.files[i]
                     if (!checkAcceptedExtensions(file)) {
                         console.log('The received file is not a valid type')
+                        res.status(400)
                         return res.json({ ok: false, msg: 'The sent file is not a valid type' })
                     }
                     const fileName = encodeURIComponent(file.name.replace(/&. *;+/g, '-'))
@@ -114,6 +117,7 @@ exports.uploadFiles = async function (req, res, next) {
                     } catch (e) {
                         console.log('Error uploading the file')
                         try { await fs.unlinkAsync(file.path) } catch (e) { }
+                        res.status(400)
                         return res.json({ ok: false, msg: 'Error uploading the file' })
                     }
                 }
