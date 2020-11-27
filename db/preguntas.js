@@ -35,7 +35,7 @@ exports.updatePregunta = function (doc, callback) {
     // Replaced .update() with .updateMany() as .update() is deprecated
     model.Preguntas.findOneAndUpdate(
         {_id : doc.idPregunta},
-        { $push: { revisiones : doc.revision, status: "REVISION" }}, null , function (err, data) {
+        { $push: { revisiones : doc.revision }, $set: {status: "REVISION"}}, null , function (err, data) {
             callback(err, data)
         }).populate('questions','revisiones')
 } 
